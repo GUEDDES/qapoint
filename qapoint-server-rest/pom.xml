@@ -29,7 +29,7 @@
 
 		<dependency>
 			<groupId>edu.boun.ssw</groupId>
-			<artifactId>qapoint-client-core</artifactId>
+			<artifactId>qapoint-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
