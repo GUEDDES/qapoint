@@ -1,0 +1,4 @@
+#Metadata: Fileset: GPOS
+#Sun Dec 04 15:02:08 EET 2011
+tdb.file.type=rangeindex
+tdb.file.indexorder=GPOS

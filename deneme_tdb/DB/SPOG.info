@@ -1,0 +1,4 @@
+#Metadata: Fileset: SPOG
+#Sun Dec 04 15:15:14 EET 2011
+tdb.file.type=rangeindex
+tdb.file.indexorder=SPOG
