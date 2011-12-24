@@ -1,5 +1,8 @@
 package edu.boun.ssw.client;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ColdAnswer extends Answer {
 
 	private String username;
