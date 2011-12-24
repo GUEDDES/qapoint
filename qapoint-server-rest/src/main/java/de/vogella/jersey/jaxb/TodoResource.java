@@ -2,6 +2,7 @@ package de.vogella.jersey.jaxb;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBElement;
@@ -16,7 +17,7 @@ public class TodoResource {
 	// This method is called if XMLis request
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON })
-	public ColdAnswer getJSON() {
+	public ColdAnswer getJSON(@PathParam("todo") String question) {
 		ColdAnswer coldAnswer = new ColdAnswer();
 		coldAnswer.setAnswer("Toscana is cool! Worth to try.");
 		coldAnswer.setUsername("Tugce");
