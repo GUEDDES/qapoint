@@ -1,5 +1,9 @@
 package de.vogella.jersey.jaxb;
 
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -7,18 +11,30 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import edu.boun.ssw.client.ColdAnswer;
+import uni.boun.SentenceParser;
 
 @Path("/todo/{question}/{username}/{location}")
 public class TodoResource {
 	// This method is called if XMLis request
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON })
-	public ColdAnswer getJSON(@PathParam("question") String question, @PathParam("username") String username, @PathParam("location") String location) {
+	public LinkedList<ColdAnswer> getJSON(@PathParam("question") String question, @PathParam("username") String username, @PathParam("location") String location) {
+
+		
+//		Hashtable semanticTags = SentenceParser.sendQuestion(question);
+		
+		// store question to TDB
+		
+		
+		// get cold answers to TDB
 		ColdAnswer coldAnswer = new ColdAnswer();
 		coldAnswer.setAnswer("Toscana is cool! Worth to try.");
 		coldAnswer.setUsername("Tugce");
 		
-		return coldAnswer;
+		LinkedList<ColdAnswer> coldAnswers = new LinkedList<ColdAnswer>();
+		coldAnswers.add(coldAnswer);
+		
+		return coldAnswers;
 	}
 	
 //	@GET
