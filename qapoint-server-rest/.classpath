@@ -15,5 +15,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-core"/>
+	<classpathentry kind="lib" path="C:/Users/ttgkaymaz/.m2/repository/edu/boun/ssw/qapoint-core/0.0.1-SNAPSHOT/qapoint-core-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
