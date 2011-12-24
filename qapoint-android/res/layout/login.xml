@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget0"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="21px"
+        android:layout_y="118px"
+        android:text="Username:" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="21px"
+        android:layout_y="165px"
+        android:text="Password:" >
+    </TextView>
+
+    <Button
+        android:id="@+id/bt_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="80px"
+        android:layout_y="229px"
+        android:text="Sign Up!" >
+    </Button>
+
+    <TextView
+        android:id="@+id/widget38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="23px"
+        android:layout_y="54px"
+        android:text="Welcome to QAPoint!" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/ev_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="90dp"
+        android:layout_y="72dp"
+        android:textSize="18sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/ev_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="91dp"
+        android:layout_y="102dp"
+        android:inputType="textPassword"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/bt_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="177dp"
+        android:layout_y="152dp"
+        android:text="Sign In!" />
+
+</AbsoluteLayout>
