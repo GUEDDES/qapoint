@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, QAPointActivity!</string>
-    <string name="app_name">QAPoint</string>
-    <string name="wellcomeText">Welcome to QAPoint, a location-based question-answer platform! Just enjoy it and have fun :)</string>
-    <string name="comeinButton">Come in!</string>
-    <string name="signinError">Username or password is not valid!</string>
-
-</resources>
