@@ -29,11 +29,19 @@
         android:textSize="12sp" />
 
     <Button
+        android:id="@+id/bt_recommendedQuestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="34dp"
+        android:layout_y="345dp"
+        android:text="We have questions for you!" />
+
+    <Button
         android:id="@+id/bt_askButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="134dp"
-        android:layout_y="273dp"
+        android:layout_x="160dp"
+        android:layout_y="232dp"
         android:text="Ask now!" />
 
 </AbsoluteLayout>

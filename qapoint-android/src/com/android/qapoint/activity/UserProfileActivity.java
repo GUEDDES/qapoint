@@ -17,7 +17,9 @@ public class UserProfileActivity extends Activity {
     	String username = extras.getString("username");
     	TextView welcomeUsername = (TextView) findViewById(R.id.tv_welcomeUsername);
     	welcomeUsername.setText(welcomeUsername.getText() + " " + username);
-    	Button button = (Button) findViewById(R.id.bt_askButton);
-    	button.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
+    	Button askButton = (Button) findViewById(R.id.bt_askButton);
+    	askButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
+    	Button recommendedButton = (Button) findViewById(R.id.bt_recommendedQuestions);
+    	recommendedButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
 	}
 }
