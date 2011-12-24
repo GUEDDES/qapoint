@@ -17,15 +17,20 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 
-class SentenceParser {
+public class SentenceParser {
+
+	public static LexicalizedParser lp = null;
+	
+	static{
+		lp = new LexicalizedParser("grammar/englishPCFG.ser.gz");
+	}
 
   public static void main(String[] args) {
-    LexicalizedParser lp = 
-      new LexicalizedParser("grammar/englishPCFG.ser.gz");
+    
     if (args.length > 0) {
       demoDP(lp, args[0]);
     } else {
-      demoAPI(lp);
+      sendQuestion("What is the best italian restaurant in Istanbul?");
     }
   }
 
@@ -52,7 +57,7 @@ class SentenceParser {
     }
   }
 
-  public static void demoAPI(LexicalizedParser lp) {
+  public static void sendQuestion(String sent2) {
     // This option shows parsing a list of correctly tokenized words
 //    String[] sent = { "This", "is", "an", "easy", "sentence", "." };
 //    List<CoreLabel> rawWords = new ArrayList<CoreLabel>();
@@ -66,7 +71,6 @@ class SentenceParser {
 //    System.out.println();
 
     // This option shows loading and using an explicit tokenizer
-    String sent2 = "What is the best italian restaurant in Istanbul?";
     TokenizerFactory<CoreLabel> tokenizerFactory = 
       PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
     List<CoreLabel> rawWords2 = 
