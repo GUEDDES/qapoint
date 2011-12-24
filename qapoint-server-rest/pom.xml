@@ -27,5 +27,10 @@
 			<version>1.11</version>
 		</dependency>
 
+		<dependency>
+			<groupId>edu.boun.ssw</groupId>
+			<artifactId>qapoint-client-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
