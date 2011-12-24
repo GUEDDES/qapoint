@@ -1,10 +1,10 @@
 package com.android.qapoint.activity;
 
-import com.android.qapoint.listener.LoginActivityListener;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.android.qapoint.listener.LoginActivityListener;
 
 public class LoginActivity extends Activity{
 	@Override
