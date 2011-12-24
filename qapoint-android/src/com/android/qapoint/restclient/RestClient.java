@@ -17,6 +17,11 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import edu.boun.ssw.client.ColdAnswer;
+
 public class RestClient {
 
 	private static String convertStreamToString(InputStream is) {
@@ -52,7 +57,7 @@ public class RestClient {
 	 * rest service and prints it's response to Android Log with
 	 * labels "Praeda".
 	 */
-	public static void connect(String url)
+	public static String connect(String url)
 	{
 
 		HttpClient httpclient = new DefaultHttpClient();
@@ -63,40 +68,41 @@ public class RestClient {
 
 		// Execute the request
 		HttpResponse response;
+		String result = "";
 		try {
 			response = httpclient.execute(httpget);
 			// Examine the response status
-			Log.i("Praeda",response.getStatusLine().toString());
+			Log.i("QAPoint",response.getStatusLine().toString());
 
 			// Get hold of the response entity
 			HttpEntity entity = response.getEntity();
 			// If the response does not enclose an entity, there is no need
 			// to worry about connection release
-
+			
 			if (entity != null) {
 
 				// A Simple JSON Response Read
 				InputStream instream = entity.getContent();
-				String result= convertStreamToString(instream);
-				Log.i("Praeda",result);
+				result= convertStreamToString(instream);
+				Log.i("QAPoint",result);
 
 				// A Simple JSONObject Creation
 				JSONObject json=new JSONObject(result);
-				Log.i("Praeda","<jsonobject>\n"+json.toString()+"\n</jsonobject>");
+				Log.i("QAPoint","<jsonobject>\n"+json.toString()+"\n</jsonobject>");
 
 				// A Simple JSONObject Parsing
 				JSONArray nameArray=json.names();
 				JSONArray valArray=json.toJSONArray(nameArray);
 				for(int i=0;i<valArray.length();i++)
 				{
-					Log.i("Praeda","<jsonname"+i+">\n"+nameArray.getString(i)+"\n</jsonname"+i+">\n"
+					Log.i("QAPoint","<jsonname"+i+">\n"+nameArray.getString(i)+"\n</jsonname"+i+">\n"
 							+"<jsonvalue"+i+">\n"+valArray.getString(i)+"\n</jsonvalue"+i+">");
 				}
+				
 
 				// Closing the input stream will trigger connection release
 				instream.close();
 			}
-
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -108,6 +114,9 @@ public class RestClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
+		return result;
 	}
 
 }

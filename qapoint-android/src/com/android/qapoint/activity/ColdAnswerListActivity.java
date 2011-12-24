@@ -7,7 +7,6 @@ import android.app.ListActivity;
 import android.os.Bundle;
 
 import com.android.qapoint.adapter.ColdAnswerArrayAdapter;
-import com.android.qapoint.restclient.RestClient;
 
 import edu.boun.ssw.client.ColdAnswer;
 

@@ -1,11 +1,11 @@
 package com.android.qapoint.activity;
 
-import com.android.qapoint.listener.UserProfileActivityListener;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.qapoint.listener.UserProfileActivityListener;
 
 public class UserProfileActivity extends Activity {
 
