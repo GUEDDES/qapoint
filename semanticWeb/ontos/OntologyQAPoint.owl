@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY OntologyQAPoint "http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:OntologyQAPoint="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Ontology rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl">
+        <imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#answered -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;answered">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <inverseOf rdf:resource="&OntologyQAPoint;isAnsweredBy"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#asked -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;asked">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <inverseOf rdf:resource="&OntologyQAPoint;isAskedBy"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;isAnswerOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="&OntologyQAPoint;Answer"/>
+        <inverseOf rdf:resource="&OntologyQAPoint;isQuestionOf"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnsweredBy -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;isAnsweredBy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;isAskedBy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isQuestionOf -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;isQuestionOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#similar -->
+
+    <ObjectProperty rdf:about="&OntologyQAPoint;similar">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/interest -->
+
+    <rdf:Description rdf:about="&foaf;interest">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/phone -->
+
+    <rdf:Description rdf:about="&foaf;phone">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/topic_interest -->
+
+    <rdf:Description rdf:about="&foaf;topic_interest">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/workInfoHomepage -->
+
+    <rdf:Description rdf:about="&foaf;workInfoHomepage">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/workplaceHomepage -->
+
+    <rdf:Description rdf:about="&foaf;workplaceHomepage">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#currentLocation -->
+
+    <DatatypeProperty rdf:about="&OntologyQAPoint;currentLocation">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;User"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer -->
+
+    <Class rdf:about="&OntologyQAPoint;Answer"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question -->
+
+    <Class rdf:about="&OntologyQAPoint;Question"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User -->
+
+    <Class rdf:about="&OntologyQAPoint;User"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#smth -->
+
+    <Class rdf:about="&OntologyQAPoint;smth">
+        <rdfs:subClassOf rdf:resource="&OntologyQAPoint;User"/>
+    </Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+
