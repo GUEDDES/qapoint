@@ -1,0 +1,4 @@
+#Metadata: Fileset: POS
+#Sun Dec 04 14:56:42 EET 2011
+tdb.file.type=rangeindex
+tdb.file.indexorder=POS
