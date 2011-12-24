@@ -1,5 +1,8 @@
 package edu.boun.ssw.client;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Question {
 
 	private String username;
