@@ -156,6 +156,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text -->
+
+    <DatatypeProperty rdf:about="&OntologyQAPoint;Text">
+        <rdfs:domain rdf:resource="&OntologyQAPoint;Question"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#currentLocation -->
 
     <DatatypeProperty rdf:about="&OntologyQAPoint;currentLocation">
@@ -194,11 +203,30 @@
     
 
 
-    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#smth -->
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#smt -->
 
-    <Class rdf:about="&OntologyQAPoint;smth">
-        <rdfs:subClassOf rdf:resource="&OntologyQAPoint;User"/>
+    <Class rdf:about="&OntologyQAPoint;smt">
+        <rdfs:subClassOf rdf:resource="&OntologyQAPoint;Answer"/>
     </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q1 -->
+
+    <NamedIndividual rdf:about="&OntologyQAPoint;q1">
+        <rdf:type rdf:resource="&OntologyQAPoint;Question"/>
+    </NamedIndividual>
 </rdf:RDF>
 
 
