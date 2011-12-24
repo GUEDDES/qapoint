@@ -14,7 +14,7 @@ public class RecommendedQuestionListActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
-		ArrayList<String> questions = (ArrayList<String>)extras.get("recommendedQuestions");		
+		ArrayList<String> questions = (ArrayList<String>)extras.get("recommendedQuestion_Texts");		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.recommendedquestions, android.R.id.empty, questions);
 		setListAdapter(adapter);
 		setContentView(R.layout.recommendedquestions);

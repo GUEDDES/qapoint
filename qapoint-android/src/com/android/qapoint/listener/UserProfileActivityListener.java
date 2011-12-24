@@ -21,6 +21,7 @@ import edu.boun.ssw.client.ColdAnswer;
 import edu.boun.ssw.client.ColdAnswerList;
 import edu.boun.ssw.client.Location;
 import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.QuestionList;
 
 
 public class UserProfileActivityListener implements OnClickListener {
@@ -32,9 +33,9 @@ public class UserProfileActivityListener implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		final String username = Session.getInstance().getUsername();
 		if (v.getId() == R.id.bt_askButton) {
-			final String questionText = ((EditText) window.findViewById(R.id.ev_questionText)).getText().toString();
-			final String username = Session.getInstance().getUsername();
+			final String questionText = ((EditText) window.findViewById(R.id.ev_questionText)).getText().toString();			
 			Question question = new Question(username, questionText);
 			final Location location = new Location();
 			location.setDistrict("istanbul");// TODO
@@ -65,13 +66,37 @@ public class UserProfileActivityListener implements OnClickListener {
 
 			}).start();
 		} if (v.getId() == R.id.bt_recommendedQuestions) {
+
+//			//TODO getRecommendedQuestions from server
+//			new Thread(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + username);
+//					Gson gson = new GsonBuilder().create();
+//					QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
+//					
+//					ArrayList<String> recommendedQuestionUsers = new ArrayList<String>();
+//					ArrayList<String> recommendedQuestionTexts = new ArrayList<String>();
+//					for (Question question : recommendedQuestionList.getQuestionList()) {
+//						recommendedQuestionUsers.add(question.getUsername());
+//						recommendedQuestionTexts.add(question.getQuestionText());
+//					}
+//					Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putStringArrayList("recommendedQuestion_Users", recommendedQuestionUsers);
+//					bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestionTexts);
+//					recommendedQuestionsIntent.putExtras(bundle);
+//					window.getContext().startActivity(recommendedQuestionsIntent);
+//				}
+//			}).start();
+			
 			Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
-			//TODO getRecommendedQuestions from server
 			Bundle bundle = new Bundle();
 			ArrayList<String> recommendedQuestions = new ArrayList<String>();
 			recommendedQuestions.add("What is the?");
 			recommendedQuestions.add("How are you?");
-			bundle.putStringArrayList("recommendedQuestions", recommendedQuestions);
+			bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestions);
 			recommendedQuestionsIntent.putExtras(bundle);
 			window.getContext().startActivity(recommendedQuestionsIntent);
 		}
