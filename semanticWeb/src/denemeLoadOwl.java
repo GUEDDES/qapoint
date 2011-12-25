@@ -5,28 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.log4j.net.SMTPAppender;
-
-import com.hp.hpl.jena.graph.Graph;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Node_Variable;
-import com.hp.hpl.jena.graph.Triple;
+import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.ResultSetFormatter;
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
-import com.hp.hpl.jena.vocabulary.DC;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 public class denemeLoadOwl {
 
@@ -37,44 +23,7 @@ public class denemeLoadOwl {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
-//        String assemblerFile = "ontos/OntologyQAPoint.owl" ;
-//
-//        Dataset ds = TDBFactory.assembleDataset(assemblerFile) ;
-		
-        // Direct way: Make a TDB-back Jena model in the named directory.
-        String directory = "MyDatabases/DB1" ;
-//        Dataset ds = TDBFactory. createDataset(directory) ;
-//        Model model = ds.getDefaultModel();
-//		Graph grap = TDBFactory.createGraph(directory);
-//		
-//		Node s = new Node_Variable("http://example.org/bob");
-//		Node p = new Node_Variable("pirasa");
-//		Node o = new Node_Variable("vvvvv");
-//
-//		Triple t = new Triple(s, p, o);
-//		grap.add(t);
-//		
-//		grap.close();
-		
-//        StmtIterator stBefore = model.listStatements();
-//        
-//        for (; stBefore.hasNext();) {
-//        	Object obj = stBefore.next();
-//			System.out.println(obj.toString());
-//		}
-//        
-//        
-//        Resource resx = model.createResource("Serkan");
-//        resx.addProperty(DC.title, "SPARQL - the book")
-//        .addProperty(DC.description, "A book about SPARQL") ;
-//        // ... do work ...
-//        
-//        ds.listNames();
-//        ExtendedIterator stAfter = ds.getDefaultModel().listStatements();
-//        for (; stAfter.hasNext();) {
-//			System.out.println(stBefore.next().toString());
-//		}
-//        
+       
 		InputStream in = new FileInputStream(new File(
 				"ontos\\OntologyQAPoint.owl"));
 		OntModel model2 = ModelFactory
@@ -99,33 +48,49 @@ public class denemeLoadOwl {
 			System.out.println(tmpInd.getLocalName());
 		}
 		
-		Individual indv = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce", res);
-		Individual indv2 = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#serkan", res);
+	    Individual indv = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q4", res);
+		Individual indv2 = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q5", res);
+        
+	
+		/*StmtIterator iterProp =  (StmtIterator)res.listProperties();
+		Property prop = null;
+		RDFNode node = null;
+		
+		for(; iterProp.hasNext();){
+			Statement s = iterProp.next();
+			if(s.getLiteral().equals("Text"))
+				break;
+		}*/
+        
+		
+		
+		/*DatatypeProperty textProp = model2.getDatatypeProperty("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text");
+		indv2.addProperty(textProp,"Question 2");*/
+		
+		
+		//Question parcalandýktan sonra elimizde kalan tagler dataproperty olarak Question sýnýfýna eklenicek
+		String baseUri = "http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl";
+		DatatypeProperty newProp= model2.createDatatypeProperty(baseUri+"#tag1");
+	    newProp.setDomain(res);
+	    newProp.setRange(XSD.xstring);
 
-		
-		iter = model2.listIndividuals(res);
-		
-		tmpInd = null;
-		for (; iter.hasNext();) {
-			tmpInd = (Individual) iter.next();
-			System.out.println(tmpInd.getLocalName());
-		}
-		
-//		indv.setPropertyValue(property, value);
-		
-		// Resource r1 = model2.createResource(type)
-		// ("http://example.org/book#1") ;
-		// Resource r2 = model2.createResource("http://example.org/book#2") ;
-		//
-		// r1.addProperty(DC.title, "SPARQL - the book")
-		// .addProperty(DC.description, "A book about SPARQL") ;
-		//
-		// r2.addProperty(DC.title, "Advanced techniques for SPARQL") ;
+		/*res.addProperty(RDF.type, "tag5");
+		StmtIterator iterProp =  (StmtIterator)res.listProperties();
+		Property prop = null;
 
+		System.out.println("Properties of Question class");
+		for(; iterProp.hasNext();){
+			Statement s = iterProp.next();
+			RDFNode n= (RDFNode)s.getObject();
+			System.out.println(n.getLocalName());
+		}*/
+		
+		
+	
 		in.close();
 
-		OutputStream out = new FileOutputStream(new File(
-		"ontos\\OntologyQAPoint.owl"));
+		OutputStream out = new FileOutputStream(new File("ontos\\OntologyQAPoint.owl"));
+		
 		model2.write(out);
 		model2.close();
 //		System.out.println(" ");

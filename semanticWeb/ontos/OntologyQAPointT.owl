@@ -1,0 +1,201 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix OntologyQAPoint: <http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <http://www.w3.org/2002/07/owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl> .
+
+<http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl> rdf:type owl:Ontology ;
+                                                                    
+                                                                    owl:imports foaf: .
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#answered
+
+OntologyQAPoint:answered rdf:type owl:AsymmetricProperty ,
+                                  owl:ObjectProperty ;
+                         
+                         owl:inverseOf OntologyQAPoint:isAnsweredBy .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#asked
+
+OntologyQAPoint:asked rdf:type owl:AsymmetricProperty ,
+                               owl:ObjectProperty ;
+                      
+                      owl:inverseOf OntologyQAPoint:isAskedBy .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf
+
+OntologyQAPoint:isAnswerOf rdf:type owl:AsymmetricProperty ,
+                                    owl:ObjectProperty ;
+                           
+                           rdfs:domain OntologyQAPoint:Answer ;
+                           
+                           owl:inverseOf OntologyQAPoint:isQuestionOf .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnsweredBy
+
+OntologyQAPoint:isAnsweredBy rdf:type owl:AsymmetricProperty ,
+                                      owl:ObjectProperty .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy
+
+OntologyQAPoint:isAskedBy rdf:type owl:AsymmetricProperty ,
+                                   owl:ObjectProperty .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isQuestionOf
+
+OntologyQAPoint:isQuestionOf rdf:type owl:AsymmetricProperty ,
+                                      owl:ObjectProperty .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#similar
+
+OntologyQAPoint:similar rdf:type owl:ObjectProperty ,
+                                 owl:TransitiveProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/interest
+
+foaf:interest rdfs:domain OntologyQAPoint:User .
+
+
+
+###  http://xmlns.com/foaf/0.1/phone
+
+foaf:phone rdfs:domain OntologyQAPoint:User .
+
+
+
+###  http://xmlns.com/foaf/0.1/topic_interest
+
+foaf:topic_interest rdfs:domain OntologyQAPoint:User .
+
+
+
+###  http://xmlns.com/foaf/0.1/workInfoHomepage
+
+foaf:workInfoHomepage rdfs:domain OntologyQAPoint:User .
+
+
+
+###  http://xmlns.com/foaf/0.1/workplaceHomepage
+
+foaf:workplaceHomepage rdfs:domain OntologyQAPoint:User .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text
+
+OntologyQAPoint:Text rdf:type owl:DatatypeProperty ;
+                     
+                     rdfs:domain OntologyQAPoint:Question ;
+                     
+                     rdfs:range rdfs:Literal .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#currentLocation
+
+OntologyQAPoint:currentLocation rdf:type owl:DatatypeProperty ;
+                                
+                                rdfs:domain OntologyQAPoint:User ;
+                                
+                                rdfs:range rdfs:Literal .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer
+
+OntologyQAPoint:Answer rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question
+
+OntologyQAPoint:Question rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User
+
+OntologyQAPoint:User rdf:type owl:Class .
+
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#smt
+
+OntologyQAPoint:smt rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf OntologyQAPoint:Answer .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q1
+
+OntologyQAPoint:q1 rdf:type OntologyQAPoint:Question ,
+                            owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net
+

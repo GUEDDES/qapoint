@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
     xmlns="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -17,10 +18,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnsweredBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
@@ -30,6 +27,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tag1">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#smt">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
@@ -38,35 +40,17 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
     <imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q4">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/phone">
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/workInfoHomepage">
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/workplaceHomepage">
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce">
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
@@ -74,8 +58,8 @@
     <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isQuestionOf"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/topic_interest">
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#currentLocation">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
@@ -83,10 +67,53 @@
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#serkan">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type>Question 1</rdf:type>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#similar">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q5">
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <OntologyQAPoint:Text>Question 2</OntologyQAPoint:Text>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/phone">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/workInfoHomepage">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/workplaceHomepage">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/topic_interest">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
   </rdf:Description>
 </rdf:RDF>
