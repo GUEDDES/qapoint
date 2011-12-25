@@ -24,8 +24,7 @@ public class denemeLoadOwl {
 		// TODO Auto-generated method stub
 
        
-		InputStream in = new FileInputStream(new File(
-				"ontos\\OntologyQAPoint.owl"));
+		InputStream in = new FileInputStream(new File("ontos\\OntologyQAPoint.owl"));
 		OntModel model2 = ModelFactory
 				.createOntologyModel(OntModelSpec.OWL_MEM);
 		model2.read(in, null);
