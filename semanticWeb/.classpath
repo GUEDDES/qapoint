@@ -2,23 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/tugce/Documents/owlapi-3.2.4/owlapi-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/tugce/Documents/owlapi-3.2.4/owlapi-src.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/arq-2.8.8.jar" sourcepath="C:/ARQ-2.8.8/arq-2.8.8-sources.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/arq-2.8.8-tests.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/icu4j-3.4.4.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/iri-0.8.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/jena-2.6.4.jar" sourcepath="C:/JENAROOT/lib-src/jena-2.6.4-sources.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/jena-2.6.4-tests.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/junit-4.5.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/lucene-core-2.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/slf4j-api-1.5.8.jar" sourcepath="C:/JENAROOT/lib-src/iri-0.8-sources.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/slf4j-log4j12-1.5.8.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/tdb-0.8.10.jar" sourcepath="C:/TDB-0.8.10/tdb-0.8.10-sources.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/tdb-0.8.10-tests.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/wstx-asl-3.2.9.jar"/>
-	<classpathentry kind="lib" path="C:/TDB-0.8.10/lib/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="jars/arq-2.8.8-tests.jar"/>
+	<classpathentry kind="lib" path="jars/arq-2.8.8.jar"/>
+	<classpathentry kind="lib" path="jars/icu4j-3.4.4.jar"/>
+	<classpathentry kind="lib" path="jars/iri-0.8.jar"/>
+	<classpathentry kind="lib" path="jars/jena-2.6.4-tests.jar"/>
+	<classpathentry kind="lib" path="jars/jena-2.6.4.jar"/>
+	<classpathentry kind="lib" path="jars/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="jars/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="jars/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="jars/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="jars/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="jars/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="jars/tdb-0.8.10-tests.jar"/>
+	<classpathentry kind="lib" path="jars/tdb-0.8.10.jar"/>
+	<classpathentry kind="lib" path="jars/wstx-asl-3.2.9.jar"/>
+	<classpathentry kind="lib" path="jars/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
