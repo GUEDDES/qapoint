@@ -30,7 +30,7 @@ public class denemeLoadOwl {
 		model2.read(in, null);
 		// prints out the RDF/XML structure
 		
-		ExtendedIterator iterator = model2.listClasses();
+		/*ExtendedIterator iterator = model2.listClasses();
 		
 		Resource res = null;
 		for (; iterator.hasNext();) {
@@ -50,7 +50,7 @@ public class denemeLoadOwl {
 	    Individual indv = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q4", res);
 		Individual indv2 = model2.createIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#q5", res);
         
-	
+		 */
 		/*StmtIterator iterProp =  (StmtIterator)res.listProperties();
 		Property prop = null;
 		RDFNode node = null;
@@ -63,26 +63,25 @@ public class denemeLoadOwl {
         
 		
 		
-		/*DatatypeProperty textProp = model2.getDatatypeProperty("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text");
-		indv2.addProperty(textProp,"Question 2");*/
+		
+		Individual indiv3 = model2.getIndividual("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce");
+		DatatypeProperty textProp = model2.getDatatypeProperty("http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text");
+		indiv3.addProperty(textProp,"Question 3");
+		
 		
 		
 		//Question parcalandýktan sonra elimizde kalan tagler dataproperty olarak Question sýnýfýna eklenicek
-		String baseUri = "http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl";
+		
+		/*String baseUri = "http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl";
 		DatatypeProperty newProp= model2.createDatatypeProperty(baseUri+"#tag1");
 	    newProp.setDomain(res);
-	    newProp.setRange(XSD.xstring);
+	    newProp.setRange(XSD.xstring);*/
 
 		/*res.addProperty(RDF.type, "tag5");
 		StmtIterator iterProp =  (StmtIterator)res.listProperties();
 		Property prop = null;
 
-		System.out.println("Properties of Question class");
-		for(; iterProp.hasNext();){
-			Statement s = iterProp.next();
-			RDFNode n= (RDFNode)s.getObject();
-			System.out.println(n.getLocalName());
-		}*/
+	*/
 		
 		
 	
