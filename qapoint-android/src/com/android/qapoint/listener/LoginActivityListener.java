@@ -25,7 +25,6 @@ public class LoginActivityListener implements OnClickListener {
 		if(username != null && username.equals("gozde") && password != null && password.equals("1111")){
 			Session.getInstance().setUsername(username);
 			Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
-			userProfileActivityIntent.putExtra("username", username);
 			window.getContext().startActivity(userProfileActivityIntent);
 		} else {
 			Intent loginErrorActivityIntent = new Intent(window.getContext(),LoginErrorActivity.class);

@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.EditText;
 
 import com.android.qapoint.activity.ColdAnswerListActivity;
+import com.android.qapoint.activity.PersonalQuestionListActivity;
 import com.android.qapoint.activity.R;
 import com.android.qapoint.activity.RecommendedQuestionListActivity;
 import com.android.qapoint.manager.Session;
@@ -99,6 +100,42 @@ public class UserProfileActivityListener implements OnClickListener {
 			bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestions);
 			recommendedQuestionsIntent.putExtras(bundle);
 			window.getContext().startActivity(recommendedQuestionsIntent);
+		} else if (v.getId() == R.id.bt_personalQuestions) {
+			
+//			//TODO getPersonalQuestions from server
+//			new Thread(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + username);
+//					Gson gson = new GsonBuilder().create();
+//					QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
+//					
+//					ArrayList<String> personalQuestionUsers = new ArrayList<String>();
+//					ArrayList<String> personalQuestionTexts = new ArrayList<String>();
+//					for (Question question : personalQuestionList.getQuestionList()) {
+//						personalQuestionUsers.add(question.getUsername());
+//						personalQuestionTexts.add(question.getQuestionText());
+//					}
+//					Intent personalQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putStringArrayList("myQuestion_Users", personalQuestionUsers);
+//					bundle.putStringArrayList("myQuestion_Texts", personalQuestionTexts);
+//					personalQuestionsIntent.putExtras(bundle);
+//					window.getContext().startActivity(personalQuestionsIntent);
+//				}
+//			}).start();
+			
+			
+			
+			Intent myQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
+			Bundle bundle = new Bundle();
+			ArrayList<String> personalQuestions = new ArrayList<String>();
+			personalQuestions.add("What is my first Question?");
+			personalQuestions.add("What is my second Question?");
+			bundle.putStringArrayList("myQuestion_Texts", personalQuestions);
+			myQuestionsIntent.putExtras(bundle);
+			window.getContext().startActivity(myQuestionsIntent);
 		}
 
 	}

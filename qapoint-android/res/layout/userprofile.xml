@@ -44,4 +44,12 @@
         android:layout_y="232dp"
         android:text="Ask now!" />
 
+    <Button
+        android:id="@+id/bt_personalQuestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="34dp"
+        android:layout_y="404dp"
+        android:text="My Questions!" />
+
 </AbsoluteLayout>

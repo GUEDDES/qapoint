@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.qapoint.listener.UserProfileActivityListener;
+import com.android.qapoint.manager.Session;
 
 public class UserProfileActivity extends Activity {
 
@@ -13,13 +14,14 @@ public class UserProfileActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.userprofile);
-		Bundle extras = getIntent().getExtras();
-    	String username = extras.getString("username");
+    	String username = Session.getInstance().getUsername();
     	TextView welcomeUsername = (TextView) findViewById(R.id.tv_welcomeUsername);
     	welcomeUsername.setText(welcomeUsername.getText() + " " + username);
     	Button askButton = (Button) findViewById(R.id.bt_askButton);
     	askButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
     	Button recommendedButton = (Button) findViewById(R.id.bt_recommendedQuestions);
     	recommendedButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
+    	Button personalButton = (Button) findViewById(R.id.bt_personalQuestions);
+    	personalButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
 	}
 }
