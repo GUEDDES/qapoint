@@ -18,5 +18,7 @@
 	<classpathentry kind="lib" path="jars/tdb-0.8.10.jar"/>
 	<classpathentry kind="lib" path="jars/wstx-asl-3.2.9.jar"/>
 	<classpathentry kind="lib" path="jars/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="jars/owlapi-bin.jar"/>
+	<classpathentry kind="lib" path="jars/owlapi-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
