@@ -5,7 +5,7 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/tv_selectedQuestion"
+        android:id="@+id/tv_selectedPersonalQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="115px"
@@ -21,31 +21,26 @@
         android:text="Question: " >
     </TextView>
 
-    <EditText
-        android:id="@+id/et_selectedQuestionAnswer"
+    <TextView
+        android:id="@+id/tv_warmAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="115px"
-        android:layout_y="61px"
-        android:textSize="18sp" >
-    </EditText>
+        android:layout_x="17dp"
+        android:layout_y="78dp"
+        android:text="Answers: " />
 
     <TextView
-        android:id="@+id/widget34"
+        android:id="@+id/tv_warmAnswerUser1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="17px"
-        android:layout_y="72px"
-        android:text="Answer: " >
-    </TextView>
+        android:layout_x="17dp"
+        android:layout_y="118dp" />
 
-    <Button
-        android:id="@+id/bt_answerquestion"
+    <TextView
+        android:id="@+id/tv_warmAnswerText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="17px"
-        android:layout_y="137px"
-        android:text="Answer Now!" >
-    </Button>
+        android:layout_x="17dp"
+        android:layout_y="150dp"/>
 
 </AbsoluteLayout>
