@@ -52,7 +52,7 @@ public class PersonalQuestionListActivityListener implements OnItemClickListener
 //			@Override
 //			public void run() {
 //				final String text = selectedQuestion.replaceAll(" ", "%20");
-//				String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + username + "/" + text);
+//				String result = RestClient.connect("http://10.0.2.2:8080/qapoint/warmanswers/" + username + "/" + text);
 //				Gson gson = new GsonBuilder().create();
 //				WarmAnswerList warmAnswerList = gson.fromJson(result, WarmAnswerList.class);
 //				
