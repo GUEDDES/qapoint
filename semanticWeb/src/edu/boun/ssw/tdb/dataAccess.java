@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
@@ -206,11 +207,64 @@ public class dataAccess {
 
 	public ArrayList<Question> getQuestionsWithProperties(ArrayList<String> arrayList) {
 		ArrayList<Question> questionList = new ArrayList<Question>();
+		//questionListin individuallarýný gezip, tag stringi içinde bunlardan en az biri olan questionlarý dondur
+		String pathToQuest = baseUri + "#" + QuestionClass;
+		Resource resQuest = currentModel.getResource(pathToQuest);
+		String pathToTagsOfQuestProp = baseUri+ "#" + QuestionTags;
+		DatatypeProperty propTags = currentModel.getDatatypeProperty(pathToTagsOfQuestProp);
+		String pathToIsAskedBy = baseUri + "#" + QuestionUser;
+		ObjectProperty isAskedByProp = currentModel.getObjectProperty(pathToIsAskedBy);
+		String pathToQuestText = baseUri + "#" + QuestionText;
+		DatatypeProperty propText = currentModel.getDatatypeProperty(pathToQuestText);
 		
+		ExtendedIterator<Individual> iteratorForQuests = currentModel.listIndividuals(resQuest);
 		
+		for(;iteratorForQuests.hasNext();){
+			Question newQuest = new Question();
+			Individual indivQuest = iteratorForQuests.next();
+			if(indivQuest.getPropertyValue(propTags) != null){
+			String tagsOfIndiv = indivQuest.getPropertyValue(propTags).toString();
+			String questText="";
+			String userName= "";
+			if(contains(arrayList,tagsOfIndiv)){
+			   questText = indivQuest.getPropertyValue(propText).toString();
+			   Resource resUser = indivQuest.getPropertyResourceValue(isAskedByProp);
+			   Individual indivUser = currentModel.getIndividual(baseUri+"#"+resUser.getLocalName().toString());
+			   userName = indivUser.getLocalName();
+			   newQuest.setQuestionText(questText);
+			   newQuest.setUsername(userName);
+			   questionList.add(newQuest);
+			}
+		 }
+		}
 		
-		
+		for(Question q: questionList){
+			System.out.println(q.getUsername()+ "   :" + q.getQuestionText());
+		}
 		return questionList;
+	}
+	
+	private boolean contains(ArrayList<String> listOfTags,String indivTags){
+		boolean val = false;
+		ArrayList<String> indivTagList = new ArrayList<String>();
+		StringTokenizer stTokenizer = new StringTokenizer(indivTags);
+		
+		while(stTokenizer.hasMoreTokens()){
+			String nextToken = stTokenizer.nextToken(";;");
+			indivTagList.add(nextToken);
+		}
+		
+		for(int i = 0; i < listOfTags.size(); i++){
+			String currentOutTag = listOfTags.get(i);
+			for(int j = 0; j < indivTagList.size(); j++){
+				if(currentOutTag.equals(indivTagList.get(j))){
+					val=true;
+					break;
+				}
+						
+			}
+		}
+		return val;
 	}
 	
 	public ArrayList<Question> getQuestionsByUserName(String username) {
