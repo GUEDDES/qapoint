@@ -9,23 +9,23 @@ import java.util.ArrayList;
 
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.XSD;
 
-import edu.boun.ssw.client.ColdAnswer;
 import edu.boun.ssw.client.Question;
 import edu.boun.ssw.client.WarmAnswer;
-import edu.boun.ssw.client.WarmAnswerList;
 
 public class dataAccess {
 
-    static String QuestionClass = "Question";
-    static String AnswerClass = "Answer";
-    static String UserClass = "User";
+    public static String QuestionClass = "Question";
+    public static String AnswerClass = "Answer";
+    public static String UserClass = "User";
     
 	public static dataAccess dbAccess = new dataAccess("ontos\\OntologyQAPoint.owl","http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
 	
@@ -117,13 +117,13 @@ public class dataAccess {
 	//add warm answer for the question
 	public void addWarmAnswer(WarmAnswer warmAnswer, String questionText){
 		
-		// TODO: add warm answer to TDB here
+		//TODO: add warm answer to TDB here
 		//add Question Individual questionNew
 		  //dbAccess.addIndivualToSpecifClass("questionNew", dbAccess.QuestionClass);
 		
 		//add Text to questionNew
 		 //dbAccess.addProperty("Text", "Where is the best Italian rest in Taksim?", "questionNew");
-
+		
 	}
 
 	//add question
@@ -160,6 +160,28 @@ public class dataAccess {
 		return null;
 	}
 	
+	
+     //setObjectProperty
+   public void setObjectPropOfSpecClass(String propName,String classNameDom,String classNameRange){
+	   String pathToDom = baseUri + "#" + classNameDom;
+	   String pathToRange = baseUri + "#" + classNameRange;
+	   Individual domain = currentModel.getIndividual(pathToDom);
+	   Individual range = currentModel.getIndividual(pathToRange);
+	   String pathToProp= baseUri + "#" + propName;
+	   ObjectProperty p = currentModel.getObjectProperty(pathToProp); 
+	
+	   Statement newStmt = currentModel.createStatement(domain, p, range);
+	   currentModel.add(newStmt);
+	  /* Statement siblings1 = ontModel.createStatement(john, hasSibling, jane);
+
+       Statement siblings2 = ontModel.createStatement(jane, hasSibling, john);
+
+       ontModel.add(siblings1);*/
+	   
+	   
+	   
+	    writeToOwl();
+	}
 	
 	//write to owl
 	private void writeToOwl(){
