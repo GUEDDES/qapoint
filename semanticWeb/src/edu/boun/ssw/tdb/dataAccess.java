@@ -1,8 +1,11 @@
+package edu.boun.ssw.tdb;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
@@ -13,13 +16,18 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.XSD;
 
+import edu.boun.ssw.client.ColdAnswer;
+import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.WarmAnswer;
+import edu.boun.ssw.client.WarmAnswerList;
+
 public class dataAccess {
 
     static String QuestionClass = "Question";
     static String AnswerClass = "Answer";
     static String UserClass = "User";
     
-	static dataAccess dbAccess = new dataAccess("ontos\\OntologyQAPoint.owl","http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
+	public static dataAccess dbAccess = new dataAccess("ontos\\OntologyQAPoint.owl","http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
 	
 	OntModel currentModel;
 	String pathToOwl;
@@ -105,6 +113,52 @@ public class dataAccess {
 	    
 	    writeToOwl();
 	}
+
+	//add warm answer for the question
+	public void addWarmAnswer(WarmAnswer warmAnswer, String questionText){
+		
+		// TODO: add warm answer to TDB here
+		//add Question Individual questionNew
+		  //dbAccess.addIndivualToSpecifClass("questionNew", dbAccess.QuestionClass);
+		
+		//add Text to questionNew
+		 //dbAccess.addProperty("Text", "Where is the best Italian rest in Taksim?", "questionNew");
+
+	}
+
+	//add question
+	public void addQuestion(Question question){
+		
+		// TODO: add question to TDB here
+		//add Question Individual questionNew
+		  //dbAccess.addIndivualToSpecifClass("questionNew", dbAccess.QuestionClass);
+		
+		//add Text to questionNew
+		 //dbAccess.addProperty("Text", "Where is the best Italian rest in Taksim?", "questionNew");
+
+	}
+
+	
+	//get warm answers for the question
+	public ArrayList<WarmAnswer> getWarmAnswers(String questionText){
+		
+		// TODO: read warm answers from TDB here
+		WarmAnswer warmAnswer = new WarmAnswer();
+		warmAnswer.setAnswer("Toscana is cool! Worth to try.");
+		warmAnswer.setUsername("Tugce");
+		
+		
+		ArrayList<WarmAnswer> warmAnswerList = new ArrayList<WarmAnswer>();
+		warmAnswerList.add(warmAnswer);
+		
+		return warmAnswerList;
+	}
+	
+
+	public ArrayList<Question> getQuestionsWithProperties(ArrayList arrayList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	//write to owl
@@ -121,8 +175,11 @@ public class dataAccess {
 		}
 		//model2.close();
 	}
-	
-	
+
+	public ArrayList<Question> getQuestionsByUserName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 	
 	
