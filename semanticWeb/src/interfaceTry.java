@@ -1,8 +1,8 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import edu.boun.ssw.client.Question;
 import edu.boun.ssw.client.User;
-import edu.boun.ssw.client.WarmAnswer;
 import edu.boun.ssw.tdb.dataAccess;
 
 
@@ -74,7 +74,7 @@ public class interfaceTry {
 			   tagsOfQuestion += currentTag + "-";
 		   }
 		
-		   dbAccess.addProperty("TagsOfQuestion", tagsOfQuestion, exampleQuestion);
+		   dbAccess.addProperty("TagsOfQuestion", tagsOfQuestion, "QuestExample1");
 		   
 		    * */
 		  
@@ -96,18 +96,34 @@ public class interfaceTry {
 		warmAns.setUsername(answeredUser.getUsername());
 		*/
 		User askedUser = new User("askedUser");
-		User answeredUser = new User("answeredUser");
+		//User answeredUser = new User("answeredUser");
 		//dbAccess.addUser(askedUser.getUsername());
 		//dbAccess.addUser(answeredUser.getUsername());
-		Question questNew = new Question(askedUser.getUsername(), "What is the best place for eating burger in Alsancak?");
+		//Question questNew = new Question(askedUser.getUsername(), "What is the best place for eating burger in Alsancak?");
 		//dbAccess.addQuestion(questNew);
-		WarmAnswer warmAns = new WarmAnswer();
-		warmAns.setAnswer("Hi, Sunset is the best!");
-		warmAns.setUsername(answeredUser.getUsername());
+		//WarmAnswer warmAns = new WarmAnswer();
+		//warmAns.setAnswer("Hi, Sunset is the best!");
+		//warmAns.setUsername(answeredUser.getUsername());
 		
-		dbAccess.addWarmAnswer(warmAns, questNew.getQuestionText());
+		//dbAccess.addWarmAnswer(warmAns, questNew.getQuestionText());
 		
 		//dbAccess.getWarmAnswers(questNew.getQuestionText());
+		//dbAccess.getQuestionsByUserName("askedUser");
+
+		 /*ArrayList<String> listOfTags = new ArrayList<String>();
+		 listOfTags.add("best"); listOfTags.add("Italian"); listOfTags.add("food"); listOfTags.add("restaurant");
+		   
+		 String tagsOfQuestion="";
+		   for(String currentTag : listOfTags){
+			   tagsOfQuestion += currentTag + ";;";
+		   }
 		
+		 dbAccess.addProperty("TagsOfQuestion", tagsOfQuestion, "QuestExample1");*/
+		 ArrayList<String> listOfTagsEx1 = new ArrayList<String>();
+		 ArrayList<String> listOfTagsEx2 = new ArrayList<String>();
+		 
+		 listOfTagsEx1.add("neither"); listOfTagsEx1.add("nor");
+		 
+		 dbAccess.getQuestionsWithProperties(listOfTagsEx1);
 	}
 }
