@@ -46,7 +46,7 @@ public class UserProfileActivityListener implements OnClickListener {
 				@Override
 				public void run() {
 					final String text = questionText.replaceAll(" ", "%20");
-					String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + text + "/" + username + "/" + location.getDistrict());
+					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + location.getDistrict());
 
 					Gson gson = new GsonBuilder().create();
 					ColdAnswerList coldAnswerList = gson.fromJson(result, ColdAnswerList.class);
@@ -73,7 +73,7 @@ public class UserProfileActivityListener implements OnClickListener {
 //
 //				@Override
 //				public void run() {
-//					String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + username);
+//					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
 //					Gson gson = new GsonBuilder().create();
 //					QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
 //					
@@ -107,7 +107,7 @@ public class UserProfileActivityListener implements OnClickListener {
 //
 //				@Override
 //				public void run() {
-//					String result = RestClient.connect("http://10.0.2.2:8080/rest/todo/" + username);
+//					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
 //					Gson gson = new GsonBuilder().create();
 //					QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
 //					
