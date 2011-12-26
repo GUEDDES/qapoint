@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="jars/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="lib" path="jars/owlapi-bin.jar"/>
 	<classpathentry kind="lib" path="jars/owlapi-src.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
