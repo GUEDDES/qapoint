@@ -232,7 +232,7 @@ public class dataAccess {
 			if(indivUser.getLocalName().toString().equals(username)){
 			Resource resQuest = indivUser.getPropertyResourceValue(pAsked);	
 			String pathToQuestInd = baseUri+ "#" + resQuest.getLocalName();
-			Individual indivSpecificUser = currentModel.getIndividual(resQuest.getLocalName());
+			Individual indivSpecificUser = currentModel.getIndividual(pathToQuestInd);
 			newQuest.setQuestionText(indivSpecificUser.getPropertyValue(pText).toString());
 			newQuest.setUsername(username);
 			questionList.add(newQuest);
