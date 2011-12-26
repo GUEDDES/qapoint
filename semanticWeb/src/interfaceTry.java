@@ -1,6 +1,8 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
+import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.User;
+import edu.boun.ssw.client.WarmAnswer;
 import edu.boun.ssw.tdb.dataAccess;
 
 
@@ -38,39 +40,74 @@ public class interfaceTry {
 		  * */
 		  
 		
-		/*1= user soru sordugunda
+		 /*1= user soru sordugunda
 		 parcala,question individualini olustur,ekle
 		 user soru sordugunda user-question relationlari update et
-		 answerlari gez, tagleri içeren answerlari ve kimlerin sordugunu ekranda göster*/
+		 answerlari gez, tagleri içeren answerlari ve kimlerin sordugunu ekranda göster
 		
-		/*Suppose the question "What is the best Italian food restaurant in Taksim? "
+		  Suppose the question "What is the best Italian food restaurant in Taksim? "
 		  tag1 = best
 		  tag2 = Italian
 		  tag3 = food
 		  tag4 = restaurant
-		 */ 
+		 
 		  //question indiv create
-		   String exampleQuestion = "QuestExample";
+		   
+		   
+		   String exampleQuestion = "QuestExample1";
 		   String quest = "What is the best Italian food restaurant in Taksim? ";
 		   dbAccess.addIndivualToSpecifClass(exampleQuestion, dbAccess.QuestionClass);
 		   dbAccess.addProperty("Text", quest, exampleQuestion);
 		   
-		   
-		   /*ArrayList<String> listOfTags = new ArrayList<String>();
-		   listOfTags.add("best"); listOfTags.add("Italian"); listOfTags.add("food"); listOfTags.add("restaurant");
-		   
-		   int i = 0;
-		   for(String currentTag : listOfTags){
-			   String newProp = "tag" + i++;
-			   dbAccess.addDataPropToSpecificClass(newProp, dbAccess.QuestionClass);
-		   }*/
-		   
 		   //isAskedBy
 		   //asked
 		   
-		   dbAccess.setObjectPropOfSpecClass("isAskedBy","QuestExample","userTugce");
+		   dbAccess.setRelationBetweenClasses("isAskedBy","QuestExample1","userTugce");
+		   dbAccess.setRelationBetweenClasses("asked", "userTugce", "QuestExample1");
+		   
+		   
+		   ArrayList<String> listOfTags = new ArrayList<String>();
+		   listOfTags.add("best"); listOfTags.add("Italian"); listOfTags.add("food"); listOfTags.add("restaurant");
+		   
+		   String tagsOfQuestion="";
+		   for(String currentTag : listOfTags){
+			   tagsOfQuestion += currentTag + "-";
+		   }
 		
-	
+		   dbAccess.addProperty("TagsOfQuestion", tagsOfQuestion, exampleQuestion);
+		   
+		    * */
+		  
+		//denenecek metotlar
+		//addWarmAnswer
+		//addQuestion
+		//getWarmAnswer
+		
+		
+		//1.add2User
+		//2.addQuestion
+		//3.addWarmAnswer
+		//4.getWarmAnswer
+		/*User askedUser = new User("askedUser");
+		User answeredUser = new User("answeredUser");
+		Question questNew = new Question(askedUser.getUsername(), "What is the best place for eating burger in Alsancak?");
+		WarmAnswer warmAns = new WarmAnswer();
+		warmAns.setAnswer("Hi, Sunset is the best!");
+		warmAns.setUsername(answeredUser.getUsername());
+		*/
+		User askedUser = new User("askedUser");
+		User answeredUser = new User("answeredUser");
+		//dbAccess.addUser(askedUser.getUsername());
+		//dbAccess.addUser(answeredUser.getUsername());
+		Question questNew = new Question(askedUser.getUsername(), "What is the best place for eating burger in Alsancak?");
+		//dbAccess.addQuestion(questNew);
+		WarmAnswer warmAns = new WarmAnswer();
+		warmAns.setAnswer("Hi, Sunset is the best!");
+		warmAns.setUsername(answeredUser.getUsername());
+		
+		dbAccess.addWarmAnswer(warmAns, questNew.getQuestionText());
+		
+		//dbAccess.getWarmAnswers(questNew.getQuestionText());
 		
 	}
 }
