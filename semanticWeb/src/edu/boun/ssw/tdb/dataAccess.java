@@ -204,10 +204,13 @@ public class dataAccess {
 	}
 	
 
-	public ArrayList<Question> getQuestionsWithProperties(ArrayList arrayList) {
+	public ArrayList<Question> getQuestionsWithProperties(ArrayList<String> arrayList) {
+		ArrayList<Question> questionList = new ArrayList<Question>();
 		
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		
+		return questionList;
 	}
 	
 	public ArrayList<Question> getQuestionsByUserName(String username) {
