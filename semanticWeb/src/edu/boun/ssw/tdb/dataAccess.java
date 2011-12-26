@@ -13,6 +13,7 @@ import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
@@ -23,11 +24,38 @@ import edu.boun.ssw.client.WarmAnswer;
 
 public class dataAccess {
 
-    public static String QuestionClass = "Question";
-    public static String AnswerClass = "Answer";
-    public static String UserClass = "User";
+	//classes
+    public String QuestionClass = "Question";
+    String AnswerClass = "Answer";
+    String UserClass = "User";
+    
+    //dataProperties
+    String AnswerText = "AnswerText";
+    String QuestionText = "Text";
+    String UserName = "userName";
+    String UserCurrentLocation = "currentLocation";
+    String UserInterests = "interestsOfUser";
+    String AnswerTags = "TagsOfAnswer";
+    String QuestionTags =	"TagsOfQuestion";
+    
+    
+    
+    //objectProperties
+    String UserAnswer = "answered";
+    String UserQuestion = "asked";
+    String AnswerQuestion = "isAnswerOf";
+    String QuestionAnswer = "isQuestionOf";
+    String QuestionUser = "isAskedBy";
+    String AnswerUser = "isAnsweredBy";
+    //????similar?????
+    
+
     
 	public static dataAccess dbAccess = new dataAccess("ontos\\OntologyQAPoint.owl","http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
+	
+	int idForAnswers=0;
+	int idForQuestions=0;
+
 	
 	OntModel currentModel;
 	String pathToOwl;
@@ -49,6 +77,126 @@ public class dataAccess {
 		}finally{
 			
 		}
+	}
+	
+	//add warm answer for the question
+	public void addWarmAnswer(WarmAnswer warmAnswer, String questionText){
+		String newAnswerID="Answer"+ idForAnswers++;
+		this.addIndivualToSpecifClass(newAnswerID,AnswerClass);
+		String answerText = warmAnswer.getAnswer();
+		this.addProperty(AnswerText,answerText, newAnswerID);
+		
+		//yeni eklenen answerla ilgili iliþkiler setlenir
+		//question-answer isAnswerOf/isQuestionOf
+		//answer-user  answered/isAnsweredBy
+		String userName = warmAnswer.getUsername();
+		String pathToRes = baseUri + "#" + QuestionClass;
+		Resource resQuestion = currentModel.getResource(pathToRes);
+		
+			
+		Individual indivQuestion = null;
+		String pathToProp = baseUri + "#" + QuestionText;
+		
+		DatatypeProperty p = (DatatypeProperty)currentModel.getDatatypeProperty(pathToProp);
+		String pVal="";
+		
+		ExtendedIterator<Individual> iterator = currentModel.listIndividuals(resQuestion);	
+			
+		 for (; iterator.hasNext();) {
+			indivQuestion = (Individual) iterator.next();
+			pVal = indivQuestion.getPropertyValue(p).toString();
+			if(pVal.equals(questionText))
+			  break;
+			}
+        String questionName = indivQuestion.getLocalName();
+			
+		this.setRelationBetweenClasses(AnswerQuestion, newAnswerID,questionName );
+		this.setRelationBetweenClasses(QuestionAnswer, questionName, newAnswerID);
+		this.setRelationBetweenClasses(AnswerUser, newAnswerID, userName);
+		this.setRelationBetweenClasses(UserAnswer, userName,newAnswerID);
+		writeToOwl();
+	}
+
+	//add question
+	public void addQuestion(Question question){
+	  String newQuestionId = "Question" + idForQuestions++;
+	  this.addIndivualToSpecifClass(newQuestionId, QuestionClass);
+	  String questionText = question.getQuestionText();
+	  this.addProperty(QuestionText, questionText, newQuestionId);
+	
+	  //yeni eklenen answerla ilgili iliþkiler setlenir
+		//question-user  asked/isAskedBy
+	  String userName = question.getUsername();
+      String questionName = newQuestionId;
+	  this.setRelationBetweenClasses(QuestionUser, questionName, userName);
+	  this.setRelationBetweenClasses(UserQuestion, userName,questionName);
+	  
+	  writeToOwl();
+		
+	}
+
+	
+	//get warm answers for the question
+	public ArrayList<WarmAnswer> getWarmAnswers(String questionText){
+		ArrayList<WarmAnswer> warmAnswerList = new ArrayList<WarmAnswer>();
+		
+		//get only answers of that question
+		/*
+		 * question-answer -> isAnswerOf
+		 * questionýn textinden, questionýn 'id ye git
+		 * answer instancelerini gezip , isAnswerOf range = questionId olanlarý getir
+		 * */
+		
+		Resource resQuestion = currentModel.getResource(QuestionClass);
+		Resource resAns = currentModel.getResource(AnswerClass);
+		ExtendedIterator iterator = currentModel.listIndividuals(resQuestion);
+			
+		Individual indivQuestion = null;
+		String pathToProp = baseUri + "#" + QuestionText;
+		DatatypeProperty p = currentModel.getDatatypeProperty(pathToProp);
+		String pVal="";
+			
+		 for(; iterator.hasNext();) {
+				indivQuestion =  (Individual) iterator.next();
+				pVal = indivQuestion.getPropertyValue(p).toString();
+				if(pVal.equals(questionText))
+					break;
+		  }
+        String questionName = indivQuestion.getLocalName();
+		ExtendedIterator iterAnswers = currentModel.listIndividuals(resAns);
+		Property pIsAnswerOf = (Property) currentModel.getObjectProperty(AnswerQuestion);
+		Individual indivAnswer = null;
+		
+		for(;iterAnswers.hasNext();){
+			indivAnswer = (Individual)iterAnswers.next();
+			Resource resRange = indivAnswer.getPropertyResourceValue(pIsAnswerOf);
+			if(resRange.getLocalName().equals(questionName)){
+			  //add to warm list
+			}
+		}
+		
+		return warmAnswerList;
+	}
+	
+
+	public ArrayList<Question> getQuestionsWithProperties(ArrayList arrayList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ArrayList<Question> getQuestionsByUserName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void addUser(String userName){
+		this.addIndivualToSpecifClass(userName, UserClass);
+		writeToOwl();
+	}
+	
+	public void addUserInterest(String userInterest){
+		
+		
 	}
 	
 	//list all classes of model
@@ -114,57 +262,12 @@ public class dataAccess {
 	    writeToOwl();
 	}
 
-	//add warm answer for the question
-	public void addWarmAnswer(WarmAnswer warmAnswer, String questionText){
-		
-		//TODO: add warm answer to TDB here
-		//add Question Individual questionNew
-		  //dbAccess.addIndivualToSpecifClass("questionNew", dbAccess.QuestionClass);
-		
-		//add Text to questionNew
-		 //dbAccess.addProperty("Text", "Where is the best Italian rest in Taksim?", "questionNew");
-		
-	}
-
-	//add question
-	public void addQuestion(Question question){
-		
-		// TODO: add question to TDB here
-		//add Question Individual questionNew
-		  //dbAccess.addIndivualToSpecifClass("questionNew", dbAccess.QuestionClass);
-		
-		//add Text to questionNew
-		 //dbAccess.addProperty("Text", "Where is the best Italian rest in Taksim?", "questionNew");
-
-	}
-
-	
-	//get warm answers for the question
-	public ArrayList<WarmAnswer> getWarmAnswers(String questionText){
-		
-		// TODO: read warm answers from TDB here
-		WarmAnswer warmAnswer = new WarmAnswer();
-		warmAnswer.setAnswer("Toscana is cool! Worth to try.");
-		warmAnswer.setUsername("Tugce");
-		
-		
-		ArrayList<WarmAnswer> warmAnswerList = new ArrayList<WarmAnswer>();
-		warmAnswerList.add(warmAnswer);
-		
-		return warmAnswerList;
-	}
-	
-
-	public ArrayList<Question> getQuestionsWithProperties(ArrayList arrayList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
-     //setObjectProperty
-   public void setObjectPropOfSpecClass(String propName,String classNameDom,String classNameRange){
-	   String pathToDom = baseUri + "#" + classNameDom;
-	   String pathToRange = baseUri + "#" + classNameRange;
+     //setRelation
+   public void setRelationBetweenClasses(String propName,String nameDom,String nameRange){
+	   String pathToDom = baseUri + "#" + nameDom;
+	   String pathToRange = baseUri + "#" + nameRange;
 	   Individual domain = currentModel.getIndividual(pathToDom);
 	   Individual range = currentModel.getIndividual(pathToRange);
 	   String pathToProp= baseUri + "#" + propName;
@@ -172,17 +275,15 @@ public class dataAccess {
 	
 	   Statement newStmt = currentModel.createStatement(domain, p, range);
 	   currentModel.add(newStmt);
-	  /* Statement siblings1 = ontModel.createStatement(john, hasSibling, jane);
-
-       Statement siblings2 = ontModel.createStatement(jane, hasSibling, john);
-
-       ontModel.add(siblings1);*/
-	   
-	   
-	   
 	    writeToOwl();
 	}
 	
+  public void dene(){
+	  String pathToProp= baseUri + "#" +"isQuestionOf";
+	  ObjectProperty p = currentModel.getObjectProperty(pathToProp); 
+	  
+  }
+   
 	//write to owl
 	private void writeToOwl(){
 		 
@@ -198,10 +299,33 @@ public class dataAccess {
 		//model2.close();
 	}
 
-	public ArrayList<Question> getQuestionsByUserName(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	   /*
+	     add new DataProperty
+	   public void addDataPropertyToIndiv(String newDataPropName,String indivName,String value){
+		   String pathToNewProp = baseUri + "#" + newDataPropName;
+		   String pathToIndiv = baseUri + "#" + indivName;
+		   DatatypeProperty p = currentModel.createDatatypeProperty(pathToNewProp);
+		   Individual indiv = currentModel.getIndividual(pathToIndiv);
+		   p.addDomain(indiv);
+		   p.addRange(XSD.xstring);
+		   
+		  // this.addProperty(newDataPropName, value, indivName);
+		   writeToOwl(); 
+	   }
+	   
+	    set object property value
+	   public void setObjectPropValue(String propName,String value,String indivName){
+	     String pathToIndiv = baseUri + "#" + indivName;
+		 String pathToProp= baseUri + "#" + propName;
+		 ObjectProperty p = currentModel.getObjectProperty(pathToProp); 
+		 Individual indiv = currentModel.getIndividual(pathToIndiv);
+			
+		 Statement newStmt = currentModel.createStatement(indiv, p, value);
+		 currentModel.add(newStmt);
+	     writeToOwl();
+			
+	   }*/
 }
 	
 	
