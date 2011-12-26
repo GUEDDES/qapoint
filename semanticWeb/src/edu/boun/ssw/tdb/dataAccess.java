@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.ObjectProperty;
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -146,9 +147,10 @@ public class dataAccess {
 		 * questionýn textinden, questionýn 'id ye git
 		 * answer instancelerini gezip , isAnswerOf range = questionId olanlarý getir
 		 * */
-		
-		Resource resQuestion = currentModel.getResource(QuestionClass);
-		Resource resAns = currentModel.getResource(AnswerClass);
+		String pathToQuestClass = baseUri + "#" +  QuestionClass;
+		Resource resQuestion = currentModel.getResource(pathToQuestClass);
+		String pathToAnswer = baseUri + "#" + AnswerClass;
+		Resource resAns = currentModel.getResource(pathToAnswer);
 		ExtendedIterator iterator = currentModel.listIndividuals(resQuestion);
 			
 		Individual indivQuestion = null;
@@ -163,15 +165,38 @@ public class dataAccess {
 					break;
 		  }
         String questionName = indivQuestion.getLocalName();
-		ExtendedIterator iterAnswers = currentModel.listIndividuals(resAns);
-		Property pIsAnswerOf = (Property) currentModel.getObjectProperty(AnswerQuestion);
+		ExtendedIterator<Individual> iterAnswers = currentModel.listIndividuals(resAns);
+		String pathToObjectProp = baseUri + "#" + AnswerQuestion;
+		Property pIsAnswerOf = (Property) currentModel.getObjectProperty(pathToObjectProp);
 		Individual indivAnswer = null;
 		
+		String answerText = "";
+		String userName = "";
+		String pathToAnswerTextProp = baseUri + "#" + AnswerText;
+		String pathToAnswerUserProp = baseUri + "#" + AnswerUser;
+		String pathToUserNameProp = baseUri + "#" + UserName;
+		
 		for(;iterAnswers.hasNext();){
+			WarmAnswer newWarm = new WarmAnswer();
 			indivAnswer = (Individual)iterAnswers.next();
 			Resource resRange = indivAnswer.getPropertyResourceValue(pIsAnswerOf);
+			if(resRange != null){
 			if(resRange.getLocalName().equals(questionName)){
-			  //add to warm list
+			   DatatypeProperty answerTextProp = currentModel.getDatatypeProperty(pathToAnswerTextProp);
+			   answerText = indivAnswer.getPropertyValue(answerTextProp).toString();
+			   
+			   ObjectProperty isAnsweredByProp = currentModel.getObjectProperty(pathToAnswerUserProp) ;
+			   Resource answeredUser = indivAnswer.getPropertyResourceValue(isAnsweredByProp);
+			   DatatypeProperty userNameProp = currentModel.getDatatypeProperty(pathToUserNameProp);
+			   userName = answeredUser.getLocalName().toString();
+			   
+			   newWarm.setAnswer(answerText);
+			   newWarm.setUsername(userName);
+			   warmAnswerList.add(newWarm);
+			}
+			
+			for(WarmAnswer wa: warmAnswerList)
+				System.out.println(wa.getUsername()+ "  :" + wa.getAnswer() );
 			}
 		}
 		
@@ -180,13 +205,45 @@ public class dataAccess {
 	
 
 	public ArrayList<Question> getQuestionsWithProperties(ArrayList arrayList) {
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public ArrayList<Question> getQuestionsByUserName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		//User instancelari gezilcek
+		//instance.userName = username olan userlarýn asked propertylerine eslesen questonlari instance yaratýp getir
+		ArrayList<Question> questionList = new ArrayList<Question>();
+		String pathToUserClass = baseUri + "#" + UserClass;
+		String pathToUserNameProp = baseUri + "#" + UserName;
+		String pathToAskedProp = baseUri + "#" + UserQuestion;
+		String pathToQuestionText = baseUri+ "#" + QuestionText;
+		Resource resUser = currentModel.getResource(pathToUserClass);
+		
+	    DatatypeProperty pUserName = currentModel.getDatatypeProperty(pathToUserNameProp);
+	    DatatypeProperty pText = currentModel.getDatatypeProperty(pathToQuestionText);
+	    ObjectProperty pAsked = currentModel.getObjectProperty(pathToAskedProp);
+	    ExtendedIterator<Individual> iteratorForUser = currentModel.listIndividuals(resUser);
+	    
+		for(;iteratorForUser.hasNext();){
+			Question newQuest = new Question();
+			Individual indivUser = iteratorForUser.next();
+			
+			if(indivUser.getLocalName().toString().equals(username)){
+			Resource resQuest = indivUser.getPropertyResourceValue(pAsked);	
+			String pathToQuestInd = baseUri+ "#" + resQuest.getLocalName();
+			Individual indivSpecificUser = currentModel.getIndividual(resQuest.getLocalName());
+			newQuest.setQuestionText(indivSpecificUser.getPropertyValue(pText).toString());
+			newQuest.setUsername(username);
+			questionList.add(newQuest);
+			}
+		}
+		
+		for(Question q: questionList){
+			System.out.println(q.getUsername() + "  :" + q.getQuestionText());
+		}
+		
+		return questionList;
 	}
 	
 	public void addUser(String userName){
@@ -202,7 +259,7 @@ public class dataAccess {
 	//list all classes of model
 	public void listClasses(){
 	
-	 ExtendedIterator iterator = currentModel.listClasses();
+	 ExtendedIterator<OntClass> iterator = currentModel.listClasses();
 		
 		Resource res = null;
 		
