@@ -15,6 +15,8 @@ public class Question {
 		this.username = username;
 		this.questionText = questionText;
 	}
+	
+	public Question() {}
 
 	public String getUsername() {
 		return username;
