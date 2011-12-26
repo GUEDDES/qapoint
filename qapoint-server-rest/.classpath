@@ -15,5 +15,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/qapoint-core"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/qapoint-server"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/semanticWeb"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

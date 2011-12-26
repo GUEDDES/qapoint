@@ -1,5 +1,6 @@
 package de.vogella.jersey.jaxb;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,20 +12,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import edu.boun.ssw.client.ColdAnswer;
+import edu.boun.ssw.client.Question;
+import edu.boun.ssw.tdb.dataAccess;
 import uni.boun.SentenceParser;
 
-@Path("/todo/{question}/{username}/{location}")
-public class TodoResource {
+@Path("/qapoint/askquestion/{question}/{username}/{location}")
+public class ColdAnswerService {
 	// This method is called if XMLis request
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON })
 	public LinkedList<ColdAnswer> getJSON(@PathParam("question") String question, @PathParam("username") String username, @PathParam("location") String location) {
 
-		
+		// store question to TDB
+		Question newQuestion = new Question(username, question);
+		dataAccess.dbAccess.addQuestion(newQuestion);
+
 //		Hashtable semanticTags = SentenceParser.sendQuestion(question);
 		
-		// store question to TDB
-		
+		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(new ArrayList());
 		
 		// get cold answers to TDB
 		ColdAnswer coldAnswer = new ColdAnswer();
