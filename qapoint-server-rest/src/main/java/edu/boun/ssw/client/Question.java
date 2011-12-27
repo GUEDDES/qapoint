@@ -1,7 +1,5 @@
 package edu.boun.ssw.client;
 
-import java.util.ArrayList;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -9,7 +7,7 @@ public class Question {
 
 	private String username;
 	private String questionText;
-	private ArrayList<String> semanticTags= new ArrayList<String>();
+	private String semanticTags;
 
 	public Question(String username, String questionText) {
 		this.username = username;
@@ -34,11 +32,11 @@ public class Question {
 		this.questionText = questionText;
 	}
 
-	public ArrayList<String> getSemanticTags() {
+	public String getSemanticTags() {
 		return semanticTags;
 	}
 
-	public void setSemanticTags(ArrayList<String> semanticTags) {
+	public void setSemanticTags(String semanticTags) {
 		this.semanticTags = semanticTags;
 	}
 }
