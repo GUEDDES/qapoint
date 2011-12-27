@@ -25,8 +25,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1324945353561">
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#askedUser"/>
+    <OntologyQAPoint:LatitudeOfQuestion>41.085821</OntologyQAPoint:LatitudeOfQuestion>
     <OntologyQAPoint:Text>What is the best place for eating burger</OntologyQAPoint:Text>
+    <OntologyQAPoint:LongitudeOfQuestion>29.047508</OntologyQAPoint:LongitudeOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isQuestionOf">
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf"/>
@@ -42,6 +45,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#askedUser">
+    <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1324949222814"/>
     <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1324945353561"/>
     <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question0"/>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
@@ -88,8 +92,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#QuestExample1">
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#userTugce"/>
-    <OntologyQAPoint:TagsOfQuestion>best;;Italian;;food;;restaurant;;</OntologyQAPoint:TagsOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>28.966667</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:LatitudeOfQuestion>41.012241</OntologyQAPoint:LatitudeOfQuestion>
     <OntologyQAPoint:Text>What is the best Italian food restaurant in Taksim </OntologyQAPoint:Text>
+    <OntologyQAPoint:TagsOfQuestion>best;;Italian;;food;;restaurant;;</OntologyQAPoint:TagsOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
@@ -107,6 +113,13 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1324949222814">
+    <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#askedUser"/>
+    <OntologyQAPoint:LongitudeOfQuestion>30.214878</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:LatitudeOfQuestion>41.879547</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:Text>What is nearest rest</OntologyQAPoint:Text>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy">
     <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
@@ -117,6 +130,8 @@
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#askedUser"/>
     <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer0"/>
     <OntologyQAPoint:Text>What is the best place for eating sand</OntologyQAPoint:Text>
+    <OntologyQAPoint:LatitudeOfQuestion>41.076246</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>29.025879</OntologyQAPoint:LongitudeOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
@@ -144,6 +159,16 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text">
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#LongitudeOfQuestion">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#LatitudeOfQuestion">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
     <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
