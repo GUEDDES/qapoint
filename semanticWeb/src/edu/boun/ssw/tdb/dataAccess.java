@@ -23,6 +23,7 @@ import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.User;
 import edu.boun.ssw.client.WarmAnswer;
 
 public class dataAccess {
@@ -40,6 +41,8 @@ public class dataAccess {
     String UserInterests = "interestsOfUser";
     String AnswerTags = "TagsOfAnswer";
     String QuestionTags =	"TagsOfQuestion";
+    String QuestionLatitude = "LatitudeOfQuestion";
+    String QuestionLongitude = "LongitudeOfQuestion";
     
     
     
@@ -71,6 +74,7 @@ public class dataAccess {
 		this.pathToOwl = pathToOwl;
 		this.baseUri = baseUri;
 		try{
+			//in = this.getClass().getClassLoader().getResourceAsStream(pathToOwl);
 			in = new FileInputStream(new File(pathToOwl));
 		    currentModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 			currentModel.read(in, null);
@@ -127,14 +131,18 @@ public class dataAccess {
 	  this.addIndivualToSpecifClass(newQuestionId, QuestionClass);
 	  String questionText = question.getQuestionText();
 	  this.addProperty(QuestionText, questionText, newQuestionId);
-	
+	  this.addProperty(QuestionLatitude, Float.toString(question.getLat()), newQuestionId);
+	  this.addProperty(QuestionLongitude, Float.toString(question.getLngt()), newQuestionId);
+	  this.addProperty(QuestionTags, question.getSemanticTags(), newQuestionId);
 	  //yeni eklenen answerla ilgili iliþkiler setlenir
 		//question-user  asked/isAskedBy
 	  String userName = question.getUsername();
       String questionName = newQuestionId;
+      
 	  this.setRelationBetweenClasses(QuestionUser, questionName, userName);
 	  this.setRelationBetweenClasses(UserQuestion, userName,questionName);
 	  
+	  this.addUserInterest(userName,question.getSemanticTags());
 	  writeToOwl();
 		
 	}
@@ -308,9 +316,41 @@ public class dataAccess {
 		writeToOwl();
 	}
 	
-	public void addUserInterest(String userInterest){
+	public void addUserInterest(String userName,String newUserInterest){
+		//userin interestleri alinacak,listeye eklenicekler, newUserInterestListide oluscak,
+		//temp String olusturulacak
+		//userin kendi interestleri içinde olmayan interestler eklenip,update edilecek
+		String pathToInterestProp = baseUri + "#" + UserInterests;
+		Property resProp = currentModel.getProperty(pathToInterestProp);
+		String pathToIndiv = baseUri + "#" + userName;
+		Individual indivUser = currentModel.getIndividual(pathToIndiv);
+		String temp = indivUser.getPropertyValue(resProp).toString();
+		ArrayList<String> alreadyInterests = new ArrayList<String>();
+		ArrayList<String> newInterestList = new ArrayList<String>();
 		
+		StringTokenizer tokenizer = new StringTokenizer(temp);
+		while(tokenizer.hasMoreTokens()){
+			String nextToken = tokenizer.nextToken(";;");
+			alreadyInterests.add(nextToken);
+		}
 		
+	    StringTokenizer tokenizerNew = new StringTokenizer(newUserInterest);
+		while(tokenizerNew.hasMoreTokens()){
+			String nextToken = tokenizerNew.nextToken(";;");
+			newInterestList.add(nextToken);
+		}
+		
+		for(int i = 0; i < alreadyInterests.size();i++){
+			for(int j =0; j < newInterestList.size(); j++){
+				if(!contains(alreadyInterests,newInterestList.get(j))){
+					temp += newInterestList.get(j) + ";;"; 
+				}
+			}
+		}
+		
+		System.out.println(temp);
+		//RDFNode nd = new dataAccess(pathToIndiv, temp)
+		indivUser.addProperty(resProp, temp);
 	}
 	
 	//list all classes of model
@@ -337,6 +377,8 @@ public class dataAccess {
 		indiv.addProperty(prop,value);
 	    writeToOwl();
 	}
+	
+	
 	
 	//add individual to specific class
 	public void addIndivualToSpecifClass(String newIndivName, String className){
@@ -398,6 +440,52 @@ public class dataAccess {
 	  
   }
    
+  public ArrayList<User> recommend(Question quest){
+	  ArrayList<User> userList = new ArrayList<User>();
+	  String pathToUserClass = baseUri + "#" + UserClass;
+	  Resource resUser = currentModel.getResource(pathToUserClass);
+	  String pathToInterest = baseUri+ "#" + UserInterests;
+	  DatatypeProperty propInterest = currentModel.getDatatypeProperty(pathToInterest);
+	  ExtendedIterator<Individual> iteratorUser = currentModel.listIndividuals(resUser);
+	  //questinin taglerinden herhangi biri user Interestlerinde varsa recommend et
+	  ArrayList<String> questTagList = new ArrayList<String>();
+	  StringTokenizer tokenTags = new StringTokenizer(quest.getSemanticTags());
+	  while(tokenTags.hasMoreTokens()){
+		  String nextToken = tokenTags.nextToken(";;");
+		  questTagList.add(nextToken);
+	  }
+	  
+	  for(;iteratorUser.hasNext();){
+		  String interestOfCurrentIndividual="";
+		  Individual currentUser = iteratorUser.next();
+		  interestOfCurrentIndividual = currentUser.getPropertyValue(propInterest).toString();
+		  ArrayList<String> userInt = new ArrayList<String>();
+		  StringTokenizer tokenUser = new StringTokenizer(interestOfCurrentIndividual);
+		  while(tokenUser.hasMoreTokens()){
+			  String nextToken = tokenUser.nextToken(";;");
+			  userInt.add(nextToken);
+		  }
+		 
+		  for(int i= 0; i < questTagList.size(); i++){
+			  if(contains(userInt,questTagList.get(i))){
+				  User newUser = new User();
+				  newUser.setUsername(currentUser.getLocalName());
+				  newUser.setInterests(interestOfCurrentIndividual);
+				  userList.add(newUser);
+				  break;
+			  }
+		  }
+		  
+		  return userList;
+		  
+	  }
+	  
+	  
+	  
+	  return userList;
+  }
+  
+  
 	//write to owl
 	private void writeToOwl(){
 		 
@@ -414,32 +502,6 @@ public class dataAccess {
 	}
 
 	
-	   /*
-	     add new DataProperty
-	   public void addDataPropertyToIndiv(String newDataPropName,String indivName,String value){
-		   String pathToNewProp = baseUri + "#" + newDataPropName;
-		   String pathToIndiv = baseUri + "#" + indivName;
-		   DatatypeProperty p = currentModel.createDatatypeProperty(pathToNewProp);
-		   Individual indiv = currentModel.getIndividual(pathToIndiv);
-		   p.addDomain(indiv);
-		   p.addRange(XSD.xstring);
-		   
-		  // this.addProperty(newDataPropName, value, indivName);
-		   writeToOwl(); 
-	   }
-	   
-	    set object property value
-	   public void setObjectPropValue(String propName,String value,String indivName){
-	     String pathToIndiv = baseUri + "#" + indivName;
-		 String pathToProp= baseUri + "#" + propName;
-		 ObjectProperty p = currentModel.getObjectProperty(pathToProp); 
-		 Individual indiv = currentModel.getIndividual(pathToIndiv);
-			
-		 Statement newStmt = currentModel.createStatement(indiv, p, value);
-		 currentModel.add(newStmt);
-	     writeToOwl();
-			
-	   }*/
 }
 	
 	
