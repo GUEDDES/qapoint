@@ -2,6 +2,7 @@ package uni.boun;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +31,16 @@ public class SentenceParser {
     if (args.length > 0) {
       demoDP(lp, args[0]);
     } else {
-      sendQuestion("What is the best italian restaurant in Istanbul?");
+      System.out.println(sendQuestion("What is the nearest restaurant?"));
+      
+//      geo:lat 	
+//
+//      40.729542 (xsd:float)
+//
+//  geo:long 	
+//
+//      -73.986740 (xsd:float)
+
     }
   }
 
@@ -57,7 +67,7 @@ public class SentenceParser {
     }
   }
 
-  public static void sendQuestion(String sent2) {
+  public static ArrayList sendQuestion(String sent2) {
     // This option shows parsing a list of correctly tokenized words
 //    String[] sent = { "This", "is", "an", "easy", "sentence", "." };
 //    List<CoreLabel> rawWords = new ArrayList<CoreLabel>();
@@ -70,6 +80,8 @@ public class SentenceParser {
 //    parse.pennPrint();
 //    System.out.println();
 
+	  ArrayList semanticResources = new ArrayList();
+	  
     // This option shows loading and using an explicit tokenizer
     TokenizerFactory<CoreLabel> tokenizerFactory = 
       PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
@@ -100,7 +112,19 @@ public class SentenceParser {
 			subject = typedDependency.dep().label().value();
 			System.out.println(subject);
 		
-			Hashtable ontologyRefsHash = QueryRDF.getSemanticInfo(typedDependency.dep().label().value());
+			// http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+			// http://www.w3.org/2002/07/owl#Class
+			Hashtable ontologyRefsHash = QueryRDF.getSemanticInfo(typedDependency.dep().label().value(), "http://www.w3.org/2000/01/rdf-schema#subClassOf", "http://www.w3.org/2002/07/owl#Thing");
+			
+			for (Enumeration tagsEnum = ontologyRefsHash.elements(); tagsEnum.hasMoreElements(); ) {
+				String tagResource = (String) tagsEnum.nextElement();
+				
+				ArrayList properties = QueryRDF.getPropertiesOfResource(tagResource);
+				System.out.println(properties);
+				
+				//if(tagResource.indexOf("dbpedia")!=-1)
+					semanticResources.add(tagResource);
+			} 
 		}
 		
 		else if(typedDependency.reln().getShortName().indexOf("amod")!=-1){
@@ -108,6 +132,16 @@ public class SentenceParser {
 			System.out.println(typedDependency.dep().label().value());
 		
 			Hashtable ontologyRefsHash = QueryRDF.getSemanticInfo(typedDependency.dep().label().value());
+			
+			for (Enumeration tagsEnum = ontologyRefsHash.elements(); tagsEnum.hasMoreElements(); ) {
+				String tagResource = (String) tagsEnum.nextElement();
+				
+				ArrayList properties = QueryRDF.getPropertiesOfResource(tagResource);
+				System.out.println(properties);
+				
+				if(tagResource.indexOf("dbpedia")!=-1 || tagResource.indexOf("WordNet")!=-1)
+					semanticResources.add(tagResource);
+			} 
 		}
 		else if(typedDependency.reln().getShortName().indexOf("prep")!=-1){
 			System.out.println("prep");
@@ -118,7 +152,7 @@ public class SentenceParser {
 		
 	}
     
-    System.out.println();
+    return semanticResources;
 
 //    TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
 //    tp.printTree(parse);
