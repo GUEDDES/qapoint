@@ -8,8 +8,8 @@ public class Question {
 	private String username;
 	private String questionText;
 	private String semanticTags;
-	private float lat;
-	private float lngt;
+	private float lat = (float) 0.0;
+	private float lngt = (float) 0.0;
 
 	public Question(String username, String questionText) {
 		this.username = username;
