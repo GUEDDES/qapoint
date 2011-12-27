@@ -26,11 +26,27 @@ public class ColdAnswerService {
 
 		// store question to TDB
 		Question newQuestion = new Question(username, question);
+		//newQuestion
 		dataAccess.dbAccess.addQuestion(newQuestion);
 
-//		Hashtable semanticTags = SentenceParser.sendQuestion(question);
+		ArrayList semanticTags = SentenceParser.sendQuestion(question);
 		
-		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(new ArrayList());
+		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(semanticTags);
+		
+		// filter questions according to location
+		if(location!=null && !location.equals("")){
+			try {
+				String[] locationArr = location.split(":");
+				Float latitute = Float.valueOf(locationArr[0]);
+				Float longitute = Float.valueOf(locationArr[1]);
+				
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		// get cold answers to TDB
 		ColdAnswerList coldAnswerList = new ColdAnswerList();
@@ -40,6 +56,14 @@ public class ColdAnswerService {
 
 		
 		ArrayList<ColdAnswer> coldAnswers = new ArrayList<ColdAnswer>();
+		
+		for (int i = 0; i < relatedQuestions.size() ; i++) {
+			Question tmpQuestion = relatedQuestions.get(i);
+			dataAccess.dbAccess.getWarmAnswers(tmpQuestion);
+		}
+		
+		
+		
 		coldAnswers.add(coldAnswer);
 		
 		
