@@ -23,6 +23,7 @@ import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.User;
 import edu.boun.ssw.client.WarmAnswer;
 
 public class dataAccess {
@@ -73,6 +74,7 @@ public class dataAccess {
 		this.pathToOwl = pathToOwl;
 		this.baseUri = baseUri;
 		try{
+			//in = this.getClass().getClassLoader().getResourceAsStream(pathToOwl);
 			in = new FileInputStream(new File(pathToOwl));
 		    currentModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 			currentModel.read(in, null);
@@ -131,7 +133,7 @@ public class dataAccess {
 	  this.addProperty(QuestionText, questionText, newQuestionId);
 	  this.addProperty(QuestionLatitude, Float.toString(question.getLat()), newQuestionId);
 	  this.addProperty(QuestionLongitude, Float.toString(question.getLngt()), newQuestionId);
-	  
+	  this.addProperty(QuestionTags, question.getSemanticTags(), newQuestionId);
 	  //yeni eklenen answerla ilgili iliþkiler setlenir
 		//question-user  asked/isAskedBy
 	  String userName = question.getUsername();
@@ -140,6 +142,7 @@ public class dataAccess {
 	  this.setRelationBetweenClasses(QuestionUser, questionName, userName);
 	  this.setRelationBetweenClasses(UserQuestion, userName,questionName);
 	  
+	  this.addUserInterest(userName,question.getSemanticTags());
 	  writeToOwl();
 		
 	}
@@ -214,7 +217,7 @@ public class dataAccess {
 
 	public ArrayList<Question> getQuestionsWithProperties(ArrayList<String> arrayList) {
 		ArrayList<Question> questionList = new ArrayList<Question>();
-		//questionListin individuallarýný gezip, tag stringi içinde bunlardan en az biri olan questionlarý dondur
+		
 		String pathToQuest = baseUri + "#" + QuestionClass;
 		Resource resQuest = currentModel.getResource(pathToQuest);
 		String pathToTagsOfQuestProp = baseUri+ "#" + QuestionTags;
@@ -223,30 +226,36 @@ public class dataAccess {
 		ObjectProperty isAskedByProp = currentModel.getObjectProperty(pathToIsAskedBy);
 		String pathToQuestText = baseUri + "#" + QuestionText;
 		DatatypeProperty propText = currentModel.getDatatypeProperty(pathToQuestText);
-		
+		String pathToLong = baseUri + "#" + QuestionLongitude;
+		String pathToLat = baseUri + "#" + QuestionLatitude;
+		DatatypeProperty propLong = currentModel.getDatatypeProperty(pathToLong);
+		DatatypeProperty propLat = currentModel.getDatatypeProperty(pathToLat);
 		ExtendedIterator<Individual> iteratorForQuests = currentModel.listIndividuals(resQuest);
-		
 		for(;iteratorForQuests.hasNext();){
-			Question newQuest = new Question();
-			Individual indivQuest = iteratorForQuests.next();
-			if(indivQuest.getPropertyValue(propTags) != null){
-			String tagsOfIndiv = indivQuest.getPropertyValue(propTags).toString();
-			String questText="";
-			String userName= "";
-			if(contains(arrayList,tagsOfIndiv)){
-			   questText = indivQuest.getPropertyValue(propText).toString();
-			   Resource resUser = indivQuest.getPropertyResourceValue(isAskedByProp);
-			   Individual indivUser = currentModel.getIndividual(baseUri+"#"+resUser.getLocalName().toString());
-			   userName = indivUser.getLocalName();
-			   newQuest.setQuestionText(questText);
-			   newQuest.setUsername(userName);
-			   questionList.add(newQuest);
-			}
-		 }
+		Question newQuest = new Question();
+		Individual indivQuest = iteratorForQuests.next();
+		if(indivQuest.getPropertyValue(propTags) != null){
+		String tagsOfIndiv = indivQuest.getPropertyValue(propTags).toString();
+		String questText="";
+		String userName= "";
+		float longitude,latitude;
+		if(contains(arrayList,tagsOfIndiv)){
+		  questText = indivQuest.getPropertyValue(propText).toString();
+		  longitude = Float.parseFloat(indivQuest.getPropertyValue(propLong).toString());
+		  latitude = Float.parseFloat(indivQuest.getPropertyValue(propLat).toString());
+		  Resource resUser = indivQuest.getPropertyResourceValue(isAskedByProp);
+		  Individual indivUser = currentModel.getIndividual(baseUri+"#"+resUser.getLocalName().toString());
+		  userName = indivUser.getLocalName();
+		  newQuest.setQuestionText(questText);
+		  newQuest.setUsername(userName);
+		  newQuest.setLat(latitude);
+		  newQuest.setLngt(longitude);
+		  questionList.add(newQuest);
 		}
-		
+		}
+		}
 		for(Question q: questionList){
-			System.out.println(q.getUsername()+ "   :" + q.getQuestionText());
+		System.out.println(q.getUsername()+ "   :" + q.getQuestionText());
 		}
 		return questionList;
 	}
@@ -313,9 +322,41 @@ public class dataAccess {
 		writeToOwl();
 	}
 	
-	public void addUserInterest(String userInterest){
+	public void addUserInterest(String userName,String newUserInterest){
+		//userin interestleri alinacak,listeye eklenicekler, newUserInterestListide oluscak,
+		//temp String olusturulacak
+		//userin kendi interestleri içinde olmayan interestler eklenip,update edilecek
+		String pathToInterestProp = baseUri + "#" + UserInterests;
+		Property resProp = currentModel.getProperty(pathToInterestProp);
+		String pathToIndiv = baseUri + "#" + userName;
+		Individual indivUser = currentModel.getIndividual(pathToIndiv);
+		String temp = indivUser.getPropertyValue(resProp).toString();
+		ArrayList<String> alreadyInterests = new ArrayList<String>();
+		ArrayList<String> newInterestList = new ArrayList<String>();
 		
+		StringTokenizer tokenizer = new StringTokenizer(temp);
+		while(tokenizer.hasMoreTokens()){
+			String nextToken = tokenizer.nextToken(";;");
+			alreadyInterests.add(nextToken);
+		}
 		
+	    StringTokenizer tokenizerNew = new StringTokenizer(newUserInterest);
+		while(tokenizerNew.hasMoreTokens()){
+			String nextToken = tokenizerNew.nextToken(";;");
+			newInterestList.add(nextToken);
+		}
+		
+		for(int i = 0; i < alreadyInterests.size();i++){
+			for(int j =0; j < newInterestList.size(); j++){
+				if(!contains(alreadyInterests,newInterestList.get(j))){
+					temp += newInterestList.get(j) + ";;"; 
+				}
+			}
+		}
+		
+		System.out.println(temp);
+		//RDFNode nd = new dataAccess(pathToIndiv, temp)
+		indivUser.addProperty(resProp, temp);
 	}
 	
 	//list all classes of model
@@ -405,6 +446,52 @@ public class dataAccess {
 	  
   }
    
+  public ArrayList<User> recommend(Question quest){
+	  ArrayList<User> userList = new ArrayList<User>();
+	  String pathToUserClass = baseUri + "#" + UserClass;
+	  Resource resUser = currentModel.getResource(pathToUserClass);
+	  String pathToInterest = baseUri+ "#" + UserInterests;
+	  DatatypeProperty propInterest = currentModel.getDatatypeProperty(pathToInterest);
+	  ExtendedIterator<Individual> iteratorUser = currentModel.listIndividuals(resUser);
+	  //questinin taglerinden herhangi biri user Interestlerinde varsa recommend et
+	  ArrayList<String> questTagList = new ArrayList<String>();
+	  StringTokenizer tokenTags = new StringTokenizer(quest.getSemanticTags());
+	  while(tokenTags.hasMoreTokens()){
+		  String nextToken = tokenTags.nextToken(";;");
+		  questTagList.add(nextToken);
+	  }
+	  
+	  for(;iteratorUser.hasNext();){
+		  String interestOfCurrentIndividual="";
+		  Individual currentUser = iteratorUser.next();
+		  interestOfCurrentIndividual = currentUser.getPropertyValue(propInterest).toString();
+		  ArrayList<String> userInt = new ArrayList<String>();
+		  StringTokenizer tokenUser = new StringTokenizer(interestOfCurrentIndividual);
+		  while(tokenUser.hasMoreTokens()){
+			  String nextToken = tokenUser.nextToken(";;");
+			  userInt.add(nextToken);
+		  }
+		 
+		  for(int i= 0; i < questTagList.size(); i++){
+			  if(contains(userInt,questTagList.get(i))){
+				  User newUser = new User();
+				  newUser.setUsername(currentUser.getLocalName());
+				  newUser.setInterests(interestOfCurrentIndividual);
+				  userList.add(newUser);
+				  break;
+			  }
+		  }
+		  
+		  return userList;
+		  
+	  }
+	  
+	  
+	  
+	  return userList;
+  }
+  
+  
 	//write to owl
 	private void writeToOwl(){
 		 
