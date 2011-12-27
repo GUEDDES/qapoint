@@ -89,7 +89,7 @@
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#QuestExample1">
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#userTugce"/>
     <OntologyQAPoint:TagsOfQuestion>best;;Italian;;food;;restaurant;;</OntologyQAPoint:TagsOfQuestion>
-    <OntologyQAPoint:Text>What is the best Italian food restaurant in Taksim? </OntologyQAPoint:Text>
+    <OntologyQAPoint:Text>What is the best Italian food restaurant in Taksim </OntologyQAPoint:Text>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
