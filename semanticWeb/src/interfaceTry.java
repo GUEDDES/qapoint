@@ -108,7 +108,11 @@ public class interfaceTry {
 		//dbAccess.addWarmAnswer(warmAns, questNew.getQuestionText());
 		
 		//dbAccess.getWarmAnswers(questNew.getQuestionText());
-		//dbAccess.getQuestionsByUserName("askedUser");
+		
+		Question questNew = new Question(askedUser.getUsername(), "What is the best place for eating burger");
+		dbAccess.addQuestion(questNew);
+		dbAccess.getQuestionsByUserName("askedUser");
+		
 
 		 /*ArrayList<String> listOfTags = new ArrayList<String>();
 		 listOfTags.add("best"); listOfTags.add("Italian"); listOfTags.add("food"); listOfTags.add("restaurant");
@@ -119,11 +123,11 @@ public class interfaceTry {
 		   }
 		
 		 dbAccess.addProperty("TagsOfQuestion", tagsOfQuestion, "QuestExample1");*/
-		 ArrayList<String> listOfTagsEx1 = new ArrayList<String>();
+		/* ArrayList<String> listOfTagsEx1 = new ArrayList<String>();
 		 ArrayList<String> listOfTagsEx2 = new ArrayList<String>();
 		 
 		 listOfTagsEx1.add("neither"); listOfTagsEx1.add("nor");
 		 
-		 dbAccess.getQuestionsWithProperties(listOfTagsEx1);
+		 dbAccess.getQuestionsWithProperties(listOfTagsEx1);*/
 	}
 }
