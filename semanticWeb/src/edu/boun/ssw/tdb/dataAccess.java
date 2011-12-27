@@ -217,7 +217,7 @@ public class dataAccess {
 
 	public ArrayList<Question> getQuestionsWithProperties(ArrayList<String> arrayList) {
 		ArrayList<Question> questionList = new ArrayList<Question>();
-		//questionListin individuallarýný gezip, tag stringi içinde bunlardan en az biri olan questionlarý dondur
+		
 		String pathToQuest = baseUri + "#" + QuestionClass;
 		Resource resQuest = currentModel.getResource(pathToQuest);
 		String pathToTagsOfQuestProp = baseUri+ "#" + QuestionTags;
@@ -226,30 +226,36 @@ public class dataAccess {
 		ObjectProperty isAskedByProp = currentModel.getObjectProperty(pathToIsAskedBy);
 		String pathToQuestText = baseUri + "#" + QuestionText;
 		DatatypeProperty propText = currentModel.getDatatypeProperty(pathToQuestText);
-		
+		String pathToLong = baseUri + "#" + QuestionLongitude;
+		String pathToLat = baseUri + "#" + QuestionLatitude;
+		DatatypeProperty propLong = currentModel.getDatatypeProperty(pathToLong);
+		DatatypeProperty propLat = currentModel.getDatatypeProperty(pathToLat);
 		ExtendedIterator<Individual> iteratorForQuests = currentModel.listIndividuals(resQuest);
-		
 		for(;iteratorForQuests.hasNext();){
-			Question newQuest = new Question();
-			Individual indivQuest = iteratorForQuests.next();
-			if(indivQuest.getPropertyValue(propTags) != null){
-			String tagsOfIndiv = indivQuest.getPropertyValue(propTags).toString();
-			String questText="";
-			String userName= "";
-			if(contains(arrayList,tagsOfIndiv)){
-			   questText = indivQuest.getPropertyValue(propText).toString();
-			   Resource resUser = indivQuest.getPropertyResourceValue(isAskedByProp);
-			   Individual indivUser = currentModel.getIndividual(baseUri+"#"+resUser.getLocalName().toString());
-			   userName = indivUser.getLocalName();
-			   newQuest.setQuestionText(questText);
-			   newQuest.setUsername(userName);
-			   questionList.add(newQuest);
-			}
-		 }
+		Question newQuest = new Question();
+		Individual indivQuest = iteratorForQuests.next();
+		if(indivQuest.getPropertyValue(propTags) != null){
+		String tagsOfIndiv = indivQuest.getPropertyValue(propTags).toString();
+		String questText="";
+		String userName= "";
+		float longitude,latitude;
+		if(contains(arrayList,tagsOfIndiv)){
+		  questText = indivQuest.getPropertyValue(propText).toString();
+		  longitude = Float.parseFloat(indivQuest.getPropertyValue(propLong).toString());
+		  latitude = Float.parseFloat(indivQuest.getPropertyValue(propLat).toString());
+		  Resource resUser = indivQuest.getPropertyResourceValue(isAskedByProp);
+		  Individual indivUser = currentModel.getIndividual(baseUri+"#"+resUser.getLocalName().toString());
+		  userName = indivUser.getLocalName();
+		  newQuest.setQuestionText(questText);
+		  newQuest.setUsername(userName);
+		  newQuest.setLat(latitude);
+		  newQuest.setLngt(longitude);
+		  questionList.add(newQuest);
 		}
-		
+		}
+		}
 		for(Question q: questionList){
-			System.out.println(q.getUsername()+ "   :" + q.getQuestionText());
+		System.out.println(q.getUsername()+ "   :" + q.getQuestionText());
 		}
 		return questionList;
 	}
