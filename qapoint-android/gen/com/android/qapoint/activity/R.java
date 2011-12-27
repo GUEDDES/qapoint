@@ -41,9 +41,9 @@ public final class R {
         public static final int bt_returnback=0x7f060014;
         public static final int bt_signin=0x7f060012;
         public static final int bt_signup=0x7f06000e;
+        public static final int et_questionText=0x7f06001b;
         public static final int et_selectedQuestionAnswer=0x7f060003;
         public static final int ev_password=0x7f060011;
-        public static final int ev_questionText=0x7f06001b;
         public static final int ev_username=0x7f060010;
         public static final int logoImage=0x7f060015;
         public static final int textView1=0x7f060002;

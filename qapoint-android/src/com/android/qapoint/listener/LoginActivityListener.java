@@ -22,7 +22,7 @@ public class LoginActivityListener implements OnClickListener {
 	public void onClick(View v) {
 		String username = ((EditText)window.findViewById(R.id.ev_username)).getText().toString();
 		String password = ((EditText)window.findViewById(R.id.ev_password)).getText().toString();
-		if(username != null && username.equals("gozde") && password != null && password.equals("1111")){
+		if(username != null && username.equals("serkan") && password != null && password.equals("1111")){
 			Session.getInstance().setUsername(username);
 			Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
 			window.getContext().startActivity(userProfileActivityIntent);
