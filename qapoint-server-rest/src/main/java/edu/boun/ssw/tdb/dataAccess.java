@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import com.hp.hpl.jena.ontology.DatatypeProperty;
@@ -39,6 +40,8 @@ public class dataAccess {
     String UserInterests = "interestsOfUser";
     String AnswerTags = "TagsOfAnswer";
     String QuestionTags =	"TagsOfQuestion";
+    String QuestionLatitude = "LatitudeOfQuestion";
+    String QuestionLongitude = "LongitudeOfQuestion";
     
     
     
@@ -70,7 +73,7 @@ public class dataAccess {
 		this.pathToOwl = pathToOwl;
 		this.baseUri = baseUri;
 		try{
-			in = this.getClass().getClassLoader().getResourceAsStream(pathToOwl);
+			in = new FileInputStream(new File(pathToOwl));
 		    currentModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 			currentModel.read(in, null);
 			
@@ -83,7 +86,7 @@ public class dataAccess {
 	
 	//add warm answer for the question
 	public void addWarmAnswer(WarmAnswer warmAnswer, String questionText){
-		String newAnswerID="Answer"+ idForAnswers++;
+		String newAnswerID="Answer"+ new Date().getTime();
 		this.addIndivualToSpecifClass(newAnswerID,AnswerClass);
 		String answerText = warmAnswer.getAnswer();
 		this.addProperty(AnswerText,answerText, newAnswerID);
@@ -121,15 +124,19 @@ public class dataAccess {
 
 	//add question
 	public void addQuestion(Question question){
-	  String newQuestionId = "Question" + idForQuestions++;
+	  
+	  String newQuestionId = "Question" + new Date().getTime();
 	  this.addIndivualToSpecifClass(newQuestionId, QuestionClass);
 	  String questionText = question.getQuestionText();
 	  this.addProperty(QuestionText, questionText, newQuestionId);
-	
+	  this.addProperty(QuestionLatitude, Float.toString(question.getLat()), newQuestionId);
+	  this.addProperty(QuestionLongitude, Float.toString(question.getLngt()), newQuestionId);
+	  
 	  //yeni eklenen answerla ilgili iliþkiler setlenir
 		//question-user  asked/isAskedBy
 	  String userName = question.getUsername();
       String questionName = newQuestionId;
+      
 	  this.setRelationBetweenClasses(QuestionUser, questionName, userName);
 	  this.setRelationBetweenClasses(UserQuestion, userName,questionName);
 	  
@@ -271,31 +278,26 @@ public class dataAccess {
 		//User instancelari gezilcek
 		//instance.userName = username olan userlarýn asked propertylerine eslesen questonlari instance yaratýp getir
 		ArrayList<Question> questionList = new ArrayList<Question>();
-		String pathToUserClass = baseUri + "#" + UserClass;
+		String pathToQuestClass = baseUri + "#" + QuestionClass;
 		String pathToUserNameProp = baseUri + "#" + UserName;
-		String pathToAskedProp = baseUri + "#" + UserQuestion;
+		String pathToIsAskedProp = baseUri + "#" + QuestionUser;
 		String pathToQuestionText = baseUri+ "#" + QuestionText;
-		Resource resUser = currentModel.getResource(pathToUserClass);
+		Resource resAnswer = currentModel.getResource(pathToQuestClass);
 		
 	    DatatypeProperty pUserName = currentModel.getDatatypeProperty(pathToUserNameProp);
 	    DatatypeProperty pText = currentModel.getDatatypeProperty(pathToQuestionText);
-	    ObjectProperty pAsked = currentModel.getObjectProperty(pathToAskedProp);
-	    ExtendedIterator<Individual> iteratorForUser = currentModel.listIndividuals(resUser);
+	    ObjectProperty pIsAsked = currentModel.getObjectProperty(pathToIsAskedProp);
+	    ExtendedIterator<Individual> iteratorForQuest= currentModel.listIndividuals(resAnswer);
 	    
-		for(;iteratorForUser.hasNext();){
+		for(;iteratorForQuest.hasNext();){
 			Question newQuest = new Question();
-			Individual indivUser = iteratorForUser.next();
-			
-			if(indivUser.getLocalName().toString().equals(username)){
-			Resource resQuest = indivUser.getPropertyResourceValue(pAsked);	
-			String pathToQuestInd = baseUri+ "#" + resQuest.getLocalName();
-			Individual indivSpecificUser = currentModel.getIndividual(pathToQuestInd);
-			newQuest.setQuestionText(indivSpecificUser.getPropertyValue(pText).toString());
-			newQuest.setUsername(username);
-			//FIXME
-			newQuest.setSemanticTags("");
-			
-			questionList.add(newQuest);
+			Individual indivQuestion= iteratorForQuest.next();
+			Resource resUser = indivQuestion.getPropertyResourceValue(pIsAsked);
+			     
+			 if(resUser.getLocalName().toString().equals(username)){
+				newQuest.setQuestionText(indivQuestion.getPropertyValue(pText).toString());
+				newQuest.setUsername(username);
+				questionList.add(newQuest);
 			}
 		}
 		
@@ -340,6 +342,8 @@ public class dataAccess {
 		indiv.addProperty(prop,value);
 	    writeToOwl();
 	}
+	
+	
 	
 	//add individual to specific class
 	public void addIndivualToSpecifClass(String newIndivName, String className){
@@ -417,32 +421,6 @@ public class dataAccess {
 	}
 
 	
-	   /*
-	     add new DataProperty
-	   public void addDataPropertyToIndiv(String newDataPropName,String indivName,String value){
-		   String pathToNewProp = baseUri + "#" + newDataPropName;
-		   String pathToIndiv = baseUri + "#" + indivName;
-		   DatatypeProperty p = currentModel.createDatatypeProperty(pathToNewProp);
-		   Individual indiv = currentModel.getIndividual(pathToIndiv);
-		   p.addDomain(indiv);
-		   p.addRange(XSD.xstring);
-		   
-		  // this.addProperty(newDataPropName, value, indivName);
-		   writeToOwl(); 
-	   }
-	   
-	    set object property value
-	   public void setObjectPropValue(String propName,String value,String indivName){
-	     String pathToIndiv = baseUri + "#" + indivName;
-		 String pathToProp= baseUri + "#" + propName;
-		 ObjectProperty p = currentModel.getObjectProperty(pathToProp); 
-		 Individual indiv = currentModel.getIndividual(pathToIndiv);
-			
-		 Statement newStmt = currentModel.createStatement(indiv, p, value);
-		 currentModel.add(newStmt);
-	     writeToOwl();
-			
-	   }*/
 }
 	
 	
