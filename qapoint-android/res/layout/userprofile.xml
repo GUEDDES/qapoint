@@ -21,7 +21,7 @@
         android:text="Question:" />
 
     <EditText
-        android:id="@+id/ev_questionText"
+        android:id="@+id/et_questionText"
         android:layout_width="234px"
         android:layout_height="wrap_content"
         android:layout_x="34dp"
