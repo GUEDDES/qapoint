@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import edu.boun.ssw.client.ColdAnswer;
+import edu.boun.ssw.client.ColdAnswerList;
 import edu.boun.ssw.client.Question;
 import edu.boun.ssw.tdb.dataAccess;
 import uni.boun.SentenceParser;
@@ -21,7 +22,7 @@ public class ColdAnswerService {
 	// This method is called if XMLis request
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON })
-	public LinkedList<ColdAnswer> getJSON(@PathParam("question") String question, @PathParam("username") String username, @PathParam("location") String location) {
+	public ColdAnswerList getJSON(@PathParam("question") String question, @PathParam("username") String username, @PathParam("location") String location) {
 
 		// store question to TDB
 		Question newQuestion = new Question(username, question);
@@ -32,14 +33,26 @@ public class ColdAnswerService {
 		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(new ArrayList());
 		
 		// get cold answers to TDB
+		ColdAnswerList coldAnswerList = new ColdAnswerList();
 		ColdAnswer coldAnswer = new ColdAnswer();
 		coldAnswer.setAnswer("Toscana is cool! Worth to try.");
 		coldAnswer.setUsername("Tugce");
+
 		
-		LinkedList<ColdAnswer> coldAnswers = new LinkedList<ColdAnswer>();
+		ArrayList<ColdAnswer> coldAnswers = new ArrayList<ColdAnswer>();
 		coldAnswers.add(coldAnswer);
 		
-		return coldAnswers;
+		
+		//FIXME
+		ColdAnswer coldAnswer2 = new ColdAnswer();
+		coldAnswer2.setAnswer("");
+		coldAnswer2.setUsername("");
+		coldAnswers.add(coldAnswer2);
+		//FIXME
+		
+		coldAnswerList.setColdAnswerList(coldAnswers);
+		
+		return coldAnswerList;
 	}
 	
 //	@GET

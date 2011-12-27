@@ -27,6 +27,13 @@ public class RecommendedQuestionService {
 		// get questions from TDB
 		ArrayList<Question> questions =  dataAccess.dbAccess.getQuestionsByUserName(username);
 
+		//FIXME
+		Question question = new Question();
+		question.setUsername("");
+		question.setQuestionText("");
+		questions.add(question);
+		//FIXME
+		
 		QuestionList questionList = new QuestionList();
 		questionList.setQuestionList(questions);
 		
