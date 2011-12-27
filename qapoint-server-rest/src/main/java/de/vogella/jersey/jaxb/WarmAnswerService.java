@@ -27,6 +27,13 @@ public class WarmAnswerService {
 		// get answers from TDB
 		ArrayList<WarmAnswer> warmAnswerList = dataAccess.dbAccess.getWarmAnswers(question);
 		
+		//FIXME
+		WarmAnswer warmAnswer = new WarmAnswer();
+		warmAnswer.setUsername("");
+		warmAnswer.setAnswer("");
+		warmAnswerList.add(warmAnswer);
+		//FIXME
+		
 		WarmAnswerList warmAnswers = new WarmAnswerList();
 		warmAnswers.setWarmAnswerList(warmAnswerList);
 		
