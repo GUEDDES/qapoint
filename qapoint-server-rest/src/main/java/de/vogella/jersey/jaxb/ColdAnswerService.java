@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import edu.boun.ssw.client.ColdAnswer;
 import edu.boun.ssw.client.ColdAnswerList;
 import edu.boun.ssw.client.Question;
+import edu.boun.ssw.client.WarmAnswer;
 import edu.boun.ssw.tdb.dataAccess;
 import uni.boun.SentenceParser;
 
@@ -26,45 +27,48 @@ public class ColdAnswerService {
 
 		// store question to TDB
 		Question newQuestion = new Question(username, question);
-		//newQuestion
+		
+		try {
+			String[] locationArr = location.split(":");
+			float latitute = Float.parseFloat(locationArr[0]);
+			float longitute = Float.parseFloat(locationArr[1]);
+			
+			newQuestion.setLat(latitute);
+			newQuestion.setLngt(longitute);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		dataAccess.dbAccess.addQuestion(newQuestion);
 
 		ArrayList semanticTags = SentenceParser.sendQuestion(question);
 		
 		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(semanticTags);
 		
-		// filter questions according to location
-		if(location!=null && !location.equals("")){
-			try {
-				String[] locationArr = location.split(":");
-				Float latitute = Float.valueOf(locationArr[0]);
-				Float longitute = Float.valueOf(locationArr[1]);
-				
-				
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
 		// get cold answers to TDB
 		ColdAnswerList coldAnswerList = new ColdAnswerList();
-		ColdAnswer coldAnswer = new ColdAnswer();
-		coldAnswer.setAnswer("Toscana is cool! Worth to try.");
-		coldAnswer.setUsername("Tugce");
-
-		
 		ArrayList<ColdAnswer> coldAnswers = new ArrayList<ColdAnswer>();
 		
+		// filter questions according to location		
 		for (int i = 0; i < relatedQuestions.size() ; i++) {
+			
 			Question tmpQuestion = relatedQuestions.get(i);
-			dataAccess.dbAccess.getWarmAnswers(tmpQuestion);
-		}
-		
-		
-		
-		coldAnswers.add(coldAnswer);
+			
+			if( Math.abs(tmpQuestion.getLat()-newQuestion.getLat())<0.03 && Math.abs(tmpQuestion.getLngt()-newQuestion.getLngt())<0.03){
+				ArrayList<WarmAnswer> tmpWarmAnswers = dataAccess.dbAccess.getWarmAnswers(tmpQuestion.getQuestionText());
+				
+				for (int j = 0; j < tmpWarmAnswers.size(); j++) {
+					ColdAnswer coldAnswer = new ColdAnswer();
+					coldAnswer.setAnswer(tmpWarmAnswers.get(j).getAnswer());
+					coldAnswer.setUsername(tmpWarmAnswers.get(j).getUsername());
+					
+					coldAnswers.add(coldAnswer);
+				}
+				
+			}
+		}		
 		
 		
 		//FIXME
@@ -72,7 +76,6 @@ public class ColdAnswerService {
 		coldAnswer2.setAnswer("");
 		coldAnswer2.setUsername("");
 		coldAnswers.add(coldAnswer2);
-		//FIXME
 		
 		coldAnswerList.setColdAnswerList(coldAnswers);
 		
