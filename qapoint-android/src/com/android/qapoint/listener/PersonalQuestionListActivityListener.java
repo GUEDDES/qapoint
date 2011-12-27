@@ -32,46 +32,46 @@ public class PersonalQuestionListActivityListener implements OnItemClickListener
 		final String username = Session.getInstance().getUsername();
 		Object o = arg0.getAdapter().getItem(arg2);
         final String selectedQuestion = o.toString();
-        Intent answersOfQuestionIntent = new Intent(window.getContext(), AnswersOfQuestionActivity.class);
-        answersOfQuestionIntent.putExtra("selectedPersonalQuestion", selectedQuestion);
-        Bundle bundle = new Bundle();
-        bundle.putString("selectedPersonalQuestion", selectedQuestion);
-        ArrayList<String> warmAnswerUsers = new ArrayList<String>();
-        warmAnswerUsers.add("tugce");
-        ArrayList<String> warmAnswerTexts = new ArrayList<String>();
-        warmAnswerTexts.add("I think you should try....");
-		bundle.putStringArrayList("warmAnswers_Users", warmAnswerUsers);
-		bundle.putStringArrayList("warmAnswers_Answers", warmAnswerTexts);
-		answersOfQuestionIntent.putExtras(bundle);
-		window.getContext().startActivity(answersOfQuestionIntent);
+//        Intent answersOfQuestionIntent = new Intent(window.getContext(), AnswersOfQuestionActivity.class);
+//        answersOfQuestionIntent.putExtra("selectedPersonalQuestion", selectedQuestion);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("selectedPersonalQuestion", selectedQuestion);
+//        ArrayList<String> warmAnswerUsers = new ArrayList<String>();
+//        warmAnswerUsers.add("tugce");
+//        ArrayList<String> warmAnswerTexts = new ArrayList<String>();
+//        warmAnswerTexts.add("I think you should try....");
+//		bundle.putStringArrayList("warmAnswers_Users", warmAnswerUsers);
+//		bundle.putStringArrayList("warmAnswers_Answers", warmAnswerTexts);
+//		answersOfQuestionIntent.putExtras(bundle);
+//		window.getContext().startActivity(answersOfQuestionIntent);
 		
 		
-//		//TODO getPersonalQuestions from server
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				final String text = selectedQuestion.replaceAll(" ", "%20");
-//				String result = RestClient.connect("http://10.0.2.2:8080/qapoint/warmanswers/" + username + "/" + text);
-//				Gson gson = new GsonBuilder().create();
-//				WarmAnswerList warmAnswerList = gson.fromJson(result, WarmAnswerList.class);
-//				
-//				ArrayList<String> warmAnswerUsers = new ArrayList<String>();
-//				ArrayList<String> warmAnswerTexts = new ArrayList<String>();
-//				for (WarmAnswer answer : warmAnswerList.getWarmAnswerList()) {
-//					warmAnswerUsers.add(answer.getUsername());
-//					warmAnswerTexts.add(answer.getAnswer());
-//				}
-//				Intent answersOfQuestionIntent = new Intent(window.getContext(), AnswersOfQuestionActivity.class);
-//		        answersOfQuestionIntent.putExtra("selectedPersonalQuestion", selectedQuestion);
-//		        Bundle bundle = new Bundle();
-//		        bundle.putString("selectedPersonalQuestion", selectedQuestion);
-//				bundle.putStringArrayList("warmAnswers_Users", warmAnswerUsers);
-//				bundle.putStringArrayList("warmAnswers_Answers", warmAnswerTexts);
-//				answersOfQuestionIntent.putExtras(bundle);
-//				window.getContext().startActivity(answersOfQuestionIntent);
-//			}
-//		}).start();
+		//TODO getPersonalQuestions from server
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				final String text = selectedQuestion.replaceAll(" ", "%20");
+				String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/warmanswers/" + username + "/" + text);
+				Gson gson = new GsonBuilder().create();
+				WarmAnswerList warmAnswerList = gson.fromJson(result, WarmAnswerList.class);
+				
+				ArrayList<String> warmAnswerUsers = new ArrayList<String>();
+				ArrayList<String> warmAnswerTexts = new ArrayList<String>();
+				for (WarmAnswer answer : warmAnswerList.getWarmAnswerList()) {
+					warmAnswerUsers.add(answer.getUsername());
+					warmAnswerTexts.add(answer.getAnswer());
+				}
+				Intent answersOfQuestionIntent = new Intent(window.getContext(), AnswersOfQuestionActivity.class);
+		        answersOfQuestionIntent.putExtra("selectedPersonalQuestion", selectedQuestion);
+		        Bundle bundle = new Bundle();
+		        bundle.putString("selectedPersonalQuestion", selectedQuestion);
+				bundle.putStringArrayList("warmAnswers_Users", warmAnswerUsers);
+				bundle.putStringArrayList("warmAnswers_Answers", warmAnswerTexts);
+				answersOfQuestionIntent.putExtras(bundle);
+				window.getContext().startActivity(answersOfQuestionIntent);
+			}
+		}).start();
 	}
 	
 }

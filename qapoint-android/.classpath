@@ -5,8 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="lib/gson-2.0.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-core"/>
 	<classpathentry kind="lib" path="lib/jersey-client-1.11.jar"/>
 	<classpathentry kind="lib" path="lib/jersey-core-1.11.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-server-rest"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

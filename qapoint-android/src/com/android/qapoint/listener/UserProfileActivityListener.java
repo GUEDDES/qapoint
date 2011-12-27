@@ -36,17 +36,17 @@ public class UserProfileActivityListener implements OnClickListener {
 	public void onClick(View v) {
 		final String username = Session.getInstance().getUsername();
 		if (v.getId() == R.id.bt_askButton) {
-			final String questionText = ((EditText) window.findViewById(R.id.ev_questionText)).getText().toString();			
+			final String questionText = ((EditText) window.findViewById(R.id.et_questionText)).getText().toString();			
 			Question question = new Question(username, questionText);
-			final Location location = new Location();
-			location.setDistrict("istanbul");// TODO
+//			final Location location = new Location();
+//			location.setDistrict("istanbul");// TODO
 
 			new Thread(new Runnable() {
 
 				@Override
 				public void run() {
 					final String text = questionText.replaceAll(" ", "%20");
-					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + location.getDistrict());
+					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
 
 					Gson gson = new GsonBuilder().create();
 					ColdAnswerList coldAnswerList = gson.fromJson(result, ColdAnswerList.class);
@@ -68,74 +68,74 @@ public class UserProfileActivityListener implements OnClickListener {
 			}).start();
 		} if (v.getId() == R.id.bt_recommendedQuestions) {
 
-//			//TODO getRecommendedQuestions from server
-//			new Thread(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
-//					Gson gson = new GsonBuilder().create();
-//					QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
-//					
-//					ArrayList<String> recommendedQuestionUsers = new ArrayList<String>();
-//					ArrayList<String> recommendedQuestionTexts = new ArrayList<String>();
-//					for (Question question : recommendedQuestionList.getQuestionList()) {
-//						recommendedQuestionUsers.add(question.getUsername());
-//						recommendedQuestionTexts.add(question.getQuestionText());
-//					}
-//					Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
-//					Bundle bundle = new Bundle();
-//					bundle.putStringArrayList("recommendedQuestion_Users", recommendedQuestionUsers);
-//					bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestionTexts);
-//					recommendedQuestionsIntent.putExtras(bundle);
-//					window.getContext().startActivity(recommendedQuestionsIntent);
-//				}
-//			}).start();
+			//TODO getRecommendedQuestions from server
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
+					Gson gson = new GsonBuilder().create();
+					QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
+					
+					ArrayList<String> recommendedQuestionUsers = new ArrayList<String>();
+					ArrayList<String> recommendedQuestionTexts = new ArrayList<String>();
+					for (Question question : recommendedQuestionList.getQuestionList()) {
+						recommendedQuestionUsers.add(question.getUsername());
+						recommendedQuestionTexts.add(question.getQuestionText());
+					}
+					Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putStringArrayList("recommendedQuestion_Users", recommendedQuestionUsers);
+					bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestionTexts);
+					recommendedQuestionsIntent.putExtras(bundle);
+					window.getContext().startActivity(recommendedQuestionsIntent);
+				}
+			}).start();
 			
-			Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
-			Bundle bundle = new Bundle();
-			ArrayList<String> recommendedQuestions = new ArrayList<String>();
-			recommendedQuestions.add("What is the?");
-			recommendedQuestions.add("How are you?");
-			bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestions);
-			recommendedQuestionsIntent.putExtras(bundle);
-			window.getContext().startActivity(recommendedQuestionsIntent);
+//			Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
+//			Bundle bundle = new Bundle();
+//			ArrayList<String> recommendedQuestions = new ArrayList<String>();
+//			recommendedQuestions.add("What is the?");
+//			recommendedQuestions.add("How are you?");
+//			bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestions);
+//			recommendedQuestionsIntent.putExtras(bundle);
+//			window.getContext().startActivity(recommendedQuestionsIntent);
 		} else if (v.getId() == R.id.bt_personalQuestions) {
 			
-//			//TODO getPersonalQuestions from server
-//			new Thread(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
-//					Gson gson = new GsonBuilder().create();
-//					QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
-//					
-//					ArrayList<String> personalQuestionUsers = new ArrayList<String>();
-//					ArrayList<String> personalQuestionTexts = new ArrayList<String>();
-//					for (Question question : personalQuestionList.getQuestionList()) {
-//						personalQuestionUsers.add(question.getUsername());
-//						personalQuestionTexts.add(question.getQuestionText());
-//					}
-//					Intent personalQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
-//					Bundle bundle = new Bundle();
-//					bundle.putStringArrayList("myQuestion_Users", personalQuestionUsers);
-//					bundle.putStringArrayList("myQuestion_Texts", personalQuestionTexts);
-//					personalQuestionsIntent.putExtras(bundle);
-//					window.getContext().startActivity(personalQuestionsIntent);
-//				}
-//			}).start();
+			//TODO getPersonalQuestions from server
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
+					Gson gson = new GsonBuilder().create();
+					QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
+					
+					ArrayList<String> personalQuestionUsers = new ArrayList<String>();
+					ArrayList<String> personalQuestionTexts = new ArrayList<String>();
+					for (Question question : personalQuestionList.getQuestionList()) {
+						personalQuestionUsers.add(question.getUsername());
+						personalQuestionTexts.add(question.getQuestionText());
+					}
+					Intent personalQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putStringArrayList("myQuestion_Users", personalQuestionUsers);
+					bundle.putStringArrayList("myQuestion_Texts", personalQuestionTexts);
+					personalQuestionsIntent.putExtras(bundle);
+					window.getContext().startActivity(personalQuestionsIntent);
+				}
+			}).start();
 			
 			
 			
-			Intent myQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
-			Bundle bundle = new Bundle();
-			ArrayList<String> personalQuestions = new ArrayList<String>();
-			personalQuestions.add("What is my first Question?");
-			personalQuestions.add("What is my second Question?");
-			bundle.putStringArrayList("myQuestion_Texts", personalQuestions);
-			myQuestionsIntent.putExtras(bundle);
-			window.getContext().startActivity(myQuestionsIntent);
+//			Intent myQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
+//			Bundle bundle = new Bundle();
+//			ArrayList<String> personalQuestions = new ArrayList<String>();
+//			personalQuestions.add("What is my first Question?");
+//			personalQuestions.add("What is my second Question?");
+//			bundle.putStringArrayList("myQuestion_Texts", personalQuestions);
+//			myQuestionsIntent.putExtras(bundle);
+//			window.getContext().startActivity(myQuestionsIntent);
 		}
 
 	}
