@@ -49,6 +49,7 @@ public final class R {
         public static final int textView1=0x7f060002;
         public static final int tv_coldAnswer=0x7f06000b;
         public static final int tv_coldAnswerUsername=0x7f06000a;
+        public static final int tv_error1=0x7f06001f;
         public static final int tv_logo=0x7f060016;
         public static final int tv_password=0x7f06000d;
         public static final int tv_questionLabel=0x7f06001a;

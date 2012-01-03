@@ -52,4 +52,11 @@
         android:layout_y="404dp"
         android:text="My Questions!" />
 
+    <TextView
+        android:id="@+id/tv_error1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="34dp"
+        android:layout_y="243dp" />
+
 </AbsoluteLayout>

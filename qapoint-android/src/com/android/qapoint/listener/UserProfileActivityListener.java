@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.qapoint.activity.ColdAnswerListActivity;
 import com.android.qapoint.activity.PersonalQuestionListActivity;
 import com.android.qapoint.activity.R;
 import com.android.qapoint.activity.RecommendedQuestionListActivity;
+import com.android.qapoint.activity.UserProfileActivity;
 import com.android.qapoint.manager.Session;
 import com.android.qapoint.restclient.RestClient;
 import com.google.gson.Gson;
@@ -20,7 +22,6 @@ import com.google.gson.GsonBuilder;
 
 import edu.boun.ssw.client.ColdAnswer;
 import edu.boun.ssw.client.ColdAnswerList;
-import edu.boun.ssw.client.Location;
 import edu.boun.ssw.client.Question;
 import edu.boun.ssw.client.QuestionList;
 
@@ -45,24 +46,32 @@ public class UserProfileActivityListener implements OnClickListener {
 
 				@Override
 				public void run() {
-					final String text = questionText.replaceAll(" ", "%20");
-					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
 
-					Gson gson = new GsonBuilder().create();
-					ColdAnswerList coldAnswerList = gson.fromJson(result, ColdAnswerList.class);
-//					Log.i("QAPoint", coldAnswer.getUsername() + " - " + coldAnswer.getAnswer());
-					ArrayList<String> coldAnswerUsers = new ArrayList<String>();
-					ArrayList<String> coldAnswerAnswers = new ArrayList<String>();
-					for (ColdAnswer answer : coldAnswerList.getColdAnswerList()) {
-						coldAnswerUsers.add(answer.getUsername());
-						coldAnswerAnswers.add(answer.getAnswer());
+					try{
+						final String text = questionText.replaceAll(" ", "%20");
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
+	
+						Gson gson = new GsonBuilder().create();
+						ColdAnswerList coldAnswerList = gson.fromJson(result, ColdAnswerList.class);
+	//					Log.i("QAPoint", coldAnswer.getUsername() + " - " + coldAnswer.getAnswer());
+						ArrayList<String> coldAnswerUsers = new ArrayList<String>();
+						ArrayList<String> coldAnswerAnswers = new ArrayList<String>();
+						for (ColdAnswer answer : coldAnswerList.getColdAnswerList()) {
+							coldAnswerUsers.add(answer.getUsername());
+							coldAnswerAnswers.add(answer.getAnswer());
+						}
+						Intent coldAnswerListIntent = new Intent(window.getContext(), ColdAnswerListActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putStringArrayList("coldAnswers_Users", coldAnswerUsers);
+						bundle.putStringArrayList("coldAnswers_Answers", coldAnswerAnswers);
+						coldAnswerListIntent.putExtras(bundle);
+						window.getContext().startActivity(coldAnswerListIntent);
+					} catch (Exception e){
+						e.printStackTrace();
+						Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
+						userProfileActivityIntent.putExtra("error", true);
+						window.getContext().startActivity(userProfileActivityIntent);
 					}
-					Intent coldAnswerListIntent = new Intent(window.getContext(), ColdAnswerListActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putStringArrayList("coldAnswers_Users", coldAnswerUsers);
-					bundle.putStringArrayList("coldAnswers_Answers", coldAnswerAnswers);
-					coldAnswerListIntent.putExtras(bundle);
-					window.getContext().startActivity(coldAnswerListIntent);
 				}
 
 			}).start();
@@ -73,22 +82,29 @@ public class UserProfileActivityListener implements OnClickListener {
 
 				@Override
 				public void run() {
-					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
-					Gson gson = new GsonBuilder().create();
-					QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
-					
-					ArrayList<String> recommendedQuestionUsers = new ArrayList<String>();
-					ArrayList<String> recommendedQuestionTexts = new ArrayList<String>();
-					for (Question question : recommendedQuestionList.getQuestionList()) {
-						recommendedQuestionUsers.add(question.getUsername());
-						recommendedQuestionTexts.add(question.getQuestionText());
+					try{
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
+						Gson gson = new GsonBuilder().create();
+						QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
+						
+						ArrayList<String> recommendedQuestionUsers = new ArrayList<String>();
+						ArrayList<String> recommendedQuestionTexts = new ArrayList<String>();
+						for (Question question : recommendedQuestionList.getQuestionList()) {
+							recommendedQuestionUsers.add(question.getUsername());
+							recommendedQuestionTexts.add(question.getQuestionText());
+						}
+						Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putStringArrayList("recommendedQuestion_Users", recommendedQuestionUsers);
+						bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestionTexts);
+						recommendedQuestionsIntent.putExtras(bundle);
+						window.getContext().startActivity(recommendedQuestionsIntent);
+					} catch (Exception e){
+						e.printStackTrace();
+						Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
+						userProfileActivityIntent.putExtra("error", true);
+						window.getContext().startActivity(userProfileActivityIntent);
 					}
-					Intent recommendedQuestionsIntent = new Intent(window.getContext(), RecommendedQuestionListActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putStringArrayList("recommendedQuestion_Users", recommendedQuestionUsers);
-					bundle.putStringArrayList("recommendedQuestion_Texts", recommendedQuestionTexts);
-					recommendedQuestionsIntent.putExtras(bundle);
-					window.getContext().startActivity(recommendedQuestionsIntent);
 				}
 			}).start();
 			
@@ -107,22 +123,30 @@ public class UserProfileActivityListener implements OnClickListener {
 
 				@Override
 				public void run() {
-					String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
-					Gson gson = new GsonBuilder().create();
-					QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
 					
-					ArrayList<String> personalQuestionUsers = new ArrayList<String>();
-					ArrayList<String> personalQuestionTexts = new ArrayList<String>();
-					for (Question question : personalQuestionList.getQuestionList()) {
-						personalQuestionUsers.add(question.getUsername());
-						personalQuestionTexts.add(question.getQuestionText());
+					try{
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
+						Gson gson = new GsonBuilder().create();
+						QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
+						
+						ArrayList<String> personalQuestionUsers = new ArrayList<String>();
+						ArrayList<String> personalQuestionTexts = new ArrayList<String>();
+						for (Question question : personalQuestionList.getQuestionList()) {
+							personalQuestionUsers.add(question.getUsername());
+							personalQuestionTexts.add(question.getQuestionText());
+						}
+						Intent personalQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putStringArrayList("myQuestion_Users", personalQuestionUsers);
+						bundle.putStringArrayList("myQuestion_Texts", personalQuestionTexts);
+						personalQuestionsIntent.putExtras(bundle);
+						window.getContext().startActivity(personalQuestionsIntent);
+					} catch (Exception e){
+						e.printStackTrace();
+						Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
+						userProfileActivityIntent.putExtra("error", true);
+						window.getContext().startActivity(userProfileActivityIntent);
 					}
-					Intent personalQuestionsIntent = new Intent(window.getContext(), PersonalQuestionListActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putStringArrayList("myQuestion_Users", personalQuestionUsers);
-					bundle.putStringArrayList("myQuestion_Texts", personalQuestionTexts);
-					personalQuestionsIntent.putExtras(bundle);
-					window.getContext().startActivity(personalQuestionsIntent);
 				}
 			}).start();
 			
