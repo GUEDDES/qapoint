@@ -32,6 +32,7 @@ public class QuestionService {
 		question.setUsername("");
 		question.setQuestionText("");
 		questions.add(question);
+		questions.add(question);
 		//FIXME
 		
 		QuestionList questionList = new QuestionList();
