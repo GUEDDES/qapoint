@@ -24,5 +24,11 @@ public class UserProfileActivity extends Activity {
     	recommendedButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
     	Button personalButton = (Button) findViewById(R.id.bt_personalQuestions);
     	personalButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
+    	
+    	Bundle extras = getIntent().getExtras();
+    	if(extras != null && (Boolean)extras.get("error")){
+    		TextView error = (TextView)findViewById(R.id.tv_error1);
+			error.setText("Server Error!");
+    	}
 	}
 }
