@@ -32,6 +32,7 @@ public class WarmAnswerService {
 		warmAnswer.setUsername("");
 		warmAnswer.setAnswer("");
 		warmAnswerList.add(warmAnswer);
+		warmAnswerList.add(warmAnswer);
 		//FIXME
 		
 		WarmAnswerList warmAnswers = new WarmAnswerList();

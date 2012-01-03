@@ -40,10 +40,20 @@ public class ColdAnswerService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		dataAccess.dbAccess.addQuestion(newQuestion);
 
 		ArrayList semanticTags = SentenceParser.sendQuestion(question);
+		String semanticTagsStr = "";
+		
+		for (int i = 0; i < semanticTags.size(); i++) {
+			if("".equals(semanticTagsStr))
+				semanticTagsStr = (String)(semanticTags.get(i)) + ";;";
+			else
+				semanticTagsStr = semanticTagsStr + (String)(semanticTags.get(i)) + ";;";
+		}
+		
+		newQuestion.setSemanticTags(semanticTagsStr);
+		
+		dataAccess.dbAccess.addQuestion(newQuestion);
 		
 		ArrayList<Question> relatedQuestions = dataAccess.dbAccess.getQuestionsWithProperties(semanticTags);
 		
@@ -75,6 +85,7 @@ public class ColdAnswerService {
 		ColdAnswer coldAnswer2 = new ColdAnswer();
 		coldAnswer2.setAnswer("");
 		coldAnswer2.setUsername("");
+		coldAnswers.add(coldAnswer2);
 		coldAnswers.add(coldAnswer2);
 		
 		coldAnswerList.setColdAnswerList(coldAnswers);
