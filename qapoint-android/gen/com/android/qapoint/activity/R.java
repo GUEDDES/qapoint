@@ -41,6 +41,7 @@ public final class R {
         public static final int bt_returnback=0x7f060014;
         public static final int bt_signin=0x7f060012;
         public static final int bt_signup=0x7f06000e;
+        public static final int bt_similarProfiles=0x7f060020;
         public static final int et_questionText=0x7f06001b;
         public static final int et_selectedQuestionAnswer=0x7f060003;
         public static final int ev_password=0x7f060011;
@@ -75,7 +76,8 @@ public final class R {
         public static final int main=0x7f030005;
         public static final int personalquestions=0x7f030006;
         public static final int recommendedquestions=0x7f030007;
-        public static final int userprofile=0x7f030008;
+        public static final int similarprofiles=0x7f030008;
+        public static final int userprofile=0x7f030009;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

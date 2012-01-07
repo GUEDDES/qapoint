@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.qapoint.activity.ColdAnswerListActivity;
 import com.android.qapoint.activity.PersonalQuestionListActivity;
 import com.android.qapoint.activity.R;
 import com.android.qapoint.activity.RecommendedQuestionListActivity;
+import com.android.qapoint.activity.SimilarProfilesListActivity;
 import com.android.qapoint.activity.UserProfileActivity;
 import com.android.qapoint.manager.Session;
 import com.android.qapoint.restclient.RestClient;
@@ -24,6 +24,8 @@ import edu.boun.ssw.client.ColdAnswer;
 import edu.boun.ssw.client.ColdAnswerList;
 import edu.boun.ssw.client.Question;
 import edu.boun.ssw.client.QuestionList;
+import edu.boun.ssw.client.User;
+import edu.boun.ssw.client.UserList;
 
 
 public class UserProfileActivityListener implements OnClickListener {
@@ -160,6 +162,35 @@ public class UserProfileActivityListener implements OnClickListener {
 //			bundle.putStringArrayList("myQuestion_Texts", personalQuestions);
 //			myQuestionsIntent.putExtras(bundle);
 //			window.getContext().startActivity(myQuestionsIntent);
+		}  else if (v.getId() == R.id.bt_similarProfiles) {
+			//TODO getPersonalQuestions from server
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					
+					try{
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getsimilarusers/" + username);
+						Gson gson = new GsonBuilder().create();
+						UserList similarProfilesList = gson.fromJson(result, UserList.class);
+						
+						ArrayList<String> similarProfiles = new ArrayList<String>();
+						for (User user : similarProfilesList.getUserList()) {
+							similarProfiles.add(user.getUsername());
+						}
+						Intent similarProfilesIntent = new Intent(window.getContext(), SimilarProfilesListActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putStringArrayList("similarProfiles", similarProfiles);
+						similarProfilesIntent.putExtras(bundle);
+						window.getContext().startActivity(similarProfilesIntent);
+					} catch (Exception e){
+						e.printStackTrace();
+						Intent userProfileActivityIntent = new Intent(window.getContext(),UserProfileActivity.class);
+						userProfileActivityIntent.putExtra("error", true);
+						window.getContext().startActivity(userProfileActivityIntent);
+					}
+				}
+			}).start();
 		}
 
 	}
