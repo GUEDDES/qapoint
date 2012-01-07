@@ -24,6 +24,8 @@ public class UserProfileActivity extends Activity {
     	recommendedButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
     	Button personalButton = (Button) findViewById(R.id.bt_personalQuestions);
     	personalButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
+    	Button similarProfilesButton = (Button) findViewById(R.id.bt_similarProfiles);
+    	similarProfilesButton.setOnClickListener(new UserProfileActivityListener(this.getWindow()));
     	
     	Bundle extras = getIntent().getExtras();
     	if(extras != null && (Boolean)extras.get("error")){

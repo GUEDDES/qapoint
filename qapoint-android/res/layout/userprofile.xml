@@ -59,4 +59,12 @@
         android:layout_x="34dp"
         android:layout_y="243dp" />
 
+    <Button
+        android:id="@+id/bt_similarProfiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="181dp"
+        android:layout_y="404dp"
+        android:text="Similar Profiles!" />
+
 </AbsoluteLayout>
