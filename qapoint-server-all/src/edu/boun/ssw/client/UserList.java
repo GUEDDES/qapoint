@@ -6,14 +6,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class UserList {
-	private ArrayList<Question> userList;
+	private ArrayList<User> userList;
 
-	public ArrayList<Question> getQuestionList() {
+	public ArrayList<User> getUserList() {
 		return userList;
 	}
 
-	public void setQuestionList(ArrayList<Question> userList) {
+	public void setUserList(ArrayList<User> userList) {
 		this.userList = userList;
 	}
-	
 }
