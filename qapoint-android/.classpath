@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="lib/gson-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/jersey-client-1.11.jar"/>
 	<classpathentry kind="lib" path="lib/jersey-core-1.11.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-server-rest"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/qapoint-server-all"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
