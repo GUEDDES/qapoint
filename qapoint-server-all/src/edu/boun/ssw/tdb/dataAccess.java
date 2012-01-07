@@ -584,7 +584,52 @@ public class dataAccess {
 		
 	}
 
-	
+	 public ArrayList<User> getSimilarUsers(String userName){
+		  ArrayList<User> listOfSimilarUsers = new ArrayList<User>();
+		  String pathToUserClass = baseUri + "#" + UserClass;
+		  Resource resUser = currentModel.getResource(pathToUserClass);
+		  String pathToInterest = baseUri+ "#" + UserInterests;
+		  DatatypeProperty propInterest = currentModel.getDatatypeProperty(pathToInterest);
+		  ExtendedIterator<Individual> iteratorUser = currentModel.listIndividuals(resUser);
+		  ExtendedIterator<Individual> iteratorUser2 = currentModel.listIndividuals(resUser);
+		 
+		  Individual currentUser = null;
+		  for(;iteratorUser.hasNext();){
+			 currentUser = iteratorUser.next();
+			 if(currentUser.getLocalName().equals(userName))
+				 break;
+		 }
+		  
+		  String interestsOfUsers = currentUser.getPropertyValue(propInterest).toString();
+		  String pathToUserName = baseUri + "#" + UserName;
+		  DatatypeProperty propUsername = currentModel.getDatatypeProperty(pathToUserName);
+		  
+		  for(;iteratorUser2.hasNext();){
+			  Individual indiv = iteratorUser2.next();
+			  String currentUserInterests = "";
+			  String currentUserName = indiv.getPropertyValue(propUsername).toString();
+			    if(indiv.getPropertyValue(propInterest) != null){
+			    	currentUserInterests = indiv.getPropertyValue(propInterest).toString();
+			    }
+			  ArrayList<String> tempList = getInterestsOfUser(currentUserInterests);
+			  if(contains(tempList, interestsOfUsers) && !(currentUserName.equals(userName))){
+				  User newUser  = new User(currentUserName);
+				  listOfSimilarUsers.add(newUser);
+			  }
+		  }
+		  
+		  return listOfSimilarUsers;
+	  }
+		  
+		private ArrayList<String> getInterestsOfUser(String interests){
+			ArrayList<String> interestsOfUser = new ArrayList<String>();
+			StringTokenizer tokenUser = new StringTokenizer(interests);
+			  while(tokenUser.hasMoreTokens()){
+				  String nextToken = tokenUser.nextToken(";;");
+				  interestsOfUser.add(nextToken);
+			  }
+			return interestsOfUser;
+		}
 }
 	
 	
