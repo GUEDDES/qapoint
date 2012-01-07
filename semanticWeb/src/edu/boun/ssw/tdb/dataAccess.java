@@ -28,6 +28,7 @@ import edu.boun.ssw.client.WarmAnswer;
 
 public class dataAccess {
 
+	public static final String QA_POINT_OWL_LOC = "D:\\dev\\workspaces_helios\\android\\qapoint-server-all\\src\\ontos\\OntologyQAPoint.owl";
 	//classes
     public String QuestionClass = "Question";
     String AnswerClass = "Answer";
@@ -57,7 +58,7 @@ public class dataAccess {
     
 
     
-	public static dataAccess dbAccess = new dataAccess("ontos\\OntologyQAPoint.owl","http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
+	public static dataAccess dbAccess = new dataAccess(QA_POINT_OWL_LOC,"http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl");
 	
 	int idForAnswers=0;
 	int idForQuestions=0;
@@ -74,7 +75,7 @@ public class dataAccess {
 		this.pathToOwl = pathToOwl;
 		this.baseUri = baseUri;
 		try{
-			//in = this.getClass().getClassLoader().getResourceAsStream(pathToOwl);
+//			in = this.getClass().getClassLoader().getResourceAsStream(pathToOwl);
 			in = new FileInputStream(new File(pathToOwl));
 		    currentModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 			currentModel.read(in, null);
@@ -297,15 +298,23 @@ public class dataAccess {
 	    DatatypeProperty pText = currentModel.getDatatypeProperty(pathToQuestionText);
 	    ObjectProperty pIsAsked = currentModel.getObjectProperty(pathToIsAskedProp);
 	    ExtendedIterator<Individual> iteratorForQuest= currentModel.listIndividuals(resAnswer);
+	    String pathToLong = baseUri + "#" + QuestionLongitude;
+	    String pathToLat = baseUri + "#" + QuestionLatitude;
+	    DatatypeProperty propLong = currentModel.getDatatypeProperty(pathToLong);
+	    DatatypeProperty propLat = currentModel.getDatatypeProperty(pathToLat);
 	    
 		for(;iteratorForQuest.hasNext();){
 			Question newQuest = new Question();
 			Individual indivQuestion= iteratorForQuest.next();
 			Resource resUser = indivQuestion.getPropertyResourceValue(pIsAsked);
-			     
+			float latitude,longitude;     
 			 if(resUser.getLocalName().toString().equals(username)){
 				newQuest.setQuestionText(indivQuestion.getPropertyValue(pText).toString());
 				newQuest.setUsername(username);
+				  longitude = Float.parseFloat(indivQuestion.getPropertyValue(propLong).toString());
+				  latitude = Float.parseFloat(indivQuestion.getPropertyValue(propLat).toString());
+				  newQuest.setLat(latitude);
+				  newQuest.setLngt(longitude);
 				questionList.add(newQuest);
 			}
 		}
@@ -330,21 +339,26 @@ public class dataAccess {
 		Property resProp = currentModel.getProperty(pathToInterestProp);
 		String pathToIndiv = baseUri + "#" + userName;
 		Individual indivUser = currentModel.getIndividual(pathToIndiv);
-		String temp = indivUser.getPropertyValue(resProp).toString();
+		String temp ="";
 		ArrayList<String> alreadyInterests = new ArrayList<String>();
 		ArrayList<String> newInterestList = new ArrayList<String>();
 		
+		StringTokenizer tokenizerNew = new StringTokenizer(newUserInterest);
+		while(tokenizerNew.hasMoreTokens()){
+			String nextToken = tokenizerNew.nextToken(";;");
+			newInterestList.add(nextToken);
+		}
+		
+		 if( indivUser.getPropertyValue(resProp)  != null){
+			 temp = indivUser.getPropertyValue(resProp).toString();
+		 
 		StringTokenizer tokenizer = new StringTokenizer(temp);
 		while(tokenizer.hasMoreTokens()){
 			String nextToken = tokenizer.nextToken(";;");
 			alreadyInterests.add(nextToken);
 		}
 		
-	    StringTokenizer tokenizerNew = new StringTokenizer(newUserInterest);
-		while(tokenizerNew.hasMoreTokens()){
-			String nextToken = tokenizerNew.nextToken(";;");
-			newInterestList.add(nextToken);
-		}
+	    
 		
 		for(int i = 0; i < alreadyInterests.size();i++){
 			for(int j =0; j < newInterestList.size(); j++){
@@ -353,6 +367,10 @@ public class dataAccess {
 				}
 			}
 		}
+		 }else{
+			for(String s: newInterestList)
+				temp += s + ";;";
+		 }
 		
 		System.out.println(temp);
 		//RDFNode nd = new dataAccess(pathToIndiv, temp)
@@ -497,10 +515,10 @@ public class dataAccess {
 		 
 		try{
 			in.close();
-		    out = new FileOutputStream(new File(pathToOwl));
+		    out = new FileOutputStream(new File(QA_POINT_OWL_LOC));
 			currentModel.write(out);
 		}catch(Exception ex){
-			
+			ex.printStackTrace();
 		}finally{
 			
 		}
