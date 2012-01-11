@@ -31,7 +31,7 @@ public class QuestionAnswerActivityListener implements OnClickListener {
 			public void run() {
 				final String qText = questionText.replaceAll(" ", "%20");
 				final String aText = answerText.replaceAll(" ", "%20");		
-				RestClient.connect("http://10.0.2.2:8080/rest/qapoint/addwarmanswer/" + qText + "/" + aText + "/" + username);
+				RestClient.connect("http://174.143.253.161:8080/rest/qapoint/addwarmanswer/" + qText + "/" + aText + "/" + username);
 
 				Intent userProfileActivityIntent = new Intent(window.getContext(), UserProfileActivity.class);
 				window.getContext().startActivity(userProfileActivityIntent);
