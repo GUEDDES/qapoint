@@ -38,8 +38,8 @@ public class LoginActivityListener implements OnClickListener {
 				public void run() {
 					
 					try{
-//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/signinuser/" + username + "/" + password);
-						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/loginuser/" + username + "/" + password);
+						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/loginuser/" + username + "/" + password);
+//						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/loginuser/" + username + "/" + password);
 						Gson gson = new GsonBuilder().create();
 						LoginResponse resp = gson.fromJson(result, LoginResponse.class);
 						if(resp.getValidUser() == 1){
