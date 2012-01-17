@@ -7,143 +7,159 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:OntologyQAPoint="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#" > 
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#answered">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnsweredBy"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#TagsOfAnswer">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1325968764944">
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
-    <OntologyQAPoint:AnswerText>You can eat at Toscana</OntologyQAPoint:AnswerText>
-    <OntologyQAPoint:isAnswerOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325967801182"/>
     <OntologyQAPoint:isAnsweredBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde"/>
+    <OntologyQAPoint:isAnswerOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325967801182"/>
+    <OntologyQAPoint:AnswerText>You can eat at Toscana</OntologyQAPoint:AnswerText>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isQuestionOf">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326828145992">
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde"/>
     <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:TagsOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
-    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
     <OntologyQAPoint:Text>Do you know any restaurant that I can eat Italian food</OntologyQAPoint:Text>
+    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnsweredBy">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
     <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325961688343">
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-    <OntologyQAPoint:Text>What is the best italian restaurant</OntologyQAPoint:Text>
-    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
-    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/class/yago/Best100127531;;http://www.ontologyportal.org/WordNet#WN30Word-best;;http://dbpedia.org/property/best;;http://dbpedia.org/class/yago/Best109851165;;http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;http://dbpedia.org/ontology/Restaurant;;</OntologyQAPoint:TagsOfQuestion>
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde"/>
     <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326552565685"/>
+    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/class/yago/Best100127531;;http://www.ontologyportal.org/WordNet#WN30Word-best;;http://dbpedia.org/property/best;;http://dbpedia.org/class/yago/Best109851165;;http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;http://dbpedia.org/ontology/Restaurant;;</OntologyQAPoint:TagsOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:Text>What is the best italian restaurant</OntologyQAPoint:Text>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#asked">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <inverseOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
     <imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326828234679">
-    <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce"/>
-    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:TagsOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
-    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
-    <OntologyQAPoint:Text>Do you know any restaurant that I can eat Italian food</OntologyQAPoint:Text>
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326828234679">
+    <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce"/>
+    <OntologyQAPoint:Text>Do you know any restaurant that I can eat Italian food</OntologyQAPoint:Text>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:TagsOfQuestion>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#AnswerText">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#password">
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#AnswerText">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozdekaymaz">
+    <OntologyQAPoint:password>1234</OntologyQAPoint:password>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAnswerOf">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
     <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#currentLocation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#serkan">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <OntologyQAPoint:password>1111</OntologyQAPoint:password>
     <OntologyQAPoint:userName>serkan</OntologyQAPoint:userName>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#similar">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326552679852">
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-    <OntologyQAPoint:Text>Where can I buy English books</OntologyQAPoint:Text>
-    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
-    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/class/yago/English,Indiana;;http://dbpedia.org/class/yago/EnglishPeople;;http://dbpedia.org/class/yago/English,August%28film%29;;http://dbpedia.org/class/yago/English,BrazoriaCounty,Texas;;http://dbpedia.org/class/yago/English,FitzOrPercy%28PrisonBreak%29;;http://dbpedia.org/class/yago/BillEnglish;;http://dbpedia.org/resource/English;;http://dbpedia.org/class/yago/EarlyModernEnglish;;http://dbpedia.org/class/yago/English,WestVirginia;;http://dbpedia.org/class/yago/English,August;;http://dbpedia.org/class/yago/EnglishClaimsToTheFrenchThrone;;</OntologyQAPoint:TagsOfQuestion>
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce"/>
+    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/class/yago/English,Indiana;;http://dbpedia.org/class/yago/EnglishPeople;;http://dbpedia.org/class/yago/English,August%28film%29;;http://dbpedia.org/class/yago/English,BrazoriaCounty,Texas;;http://dbpedia.org/class/yago/English,FitzOrPercy%28PrisonBreak%29;;http://dbpedia.org/class/yago/BillEnglish;;http://dbpedia.org/resource/English;;http://dbpedia.org/class/yago/EarlyModernEnglish;;http://dbpedia.org/class/yago/English,WestVirginia;;http://dbpedia.org/class/yago/English,August;;http://dbpedia.org/class/yago/EnglishClaimsToTheFrenchThrone;;</OntologyQAPoint:TagsOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
+    <OntologyQAPoint:Text>Where can I buy English books</OntologyQAPoint:Text>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#isAskedBy">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdfs:range rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326552565685">
-    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
-    <OntologyQAPoint:AnswerText>Paper Moon</OntologyQAPoint:AnswerText>
-    <OntologyQAPoint:isAnswerOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325961688343"/>
     <OntologyQAPoint:isAnsweredBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce"/>
+    <OntologyQAPoint:isAnswerOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325961688343"/>
+    <OntologyQAPoint:AnswerText>Paper Moon</OntologyQAPoint:AnswerText>
+    <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#interestsOfUser">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#userName">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#User"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#TagsOfQuestion">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde">
     <OntologyQAPoint:answered rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1325968764944"/>
@@ -156,21 +172,23 @@
     <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325961688343"/>
     <OntologyQAPoint:answered rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326318956163"/>
     <OntologyQAPoint:interestsOfUser>http://dbpedia.org/class/yago/Best100127531;;http://www.ontologyportal.org/WordNet#WN30Word-best;;http://dbpedia.org/property/best;;http://dbpedia.org/class/yago/Best109851165;;http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;http://dbpedia.org/ontology/Restaurant;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:interestsOfUser>
+    <OntologyQAPoint:password>1111</OntologyQAPoint:password>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325967801182">
-    <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326318956163"/>
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce"/>
-    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;</OntologyQAPoint:TagsOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326318956163"/>
+    <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1325968764944"/>
     <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
     <OntologyQAPoint:Text>Where can I eat italian food</OntologyQAPoint:Text>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
+    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;</OntologyQAPoint:TagsOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
-    <OntologyQAPoint:isQuestionOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1325968764944"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Text">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#tugce">
     <OntologyQAPoint:interestsOfUser>http://dbpedia.org/property/italian;;http://www.ontologyportal.org/WordNet#WN30Word-italian;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:interestsOfUser>
@@ -181,31 +199,34 @@
     <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325967801182"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
     <OntologyQAPoint:asked rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326828234679"/>
+    <OntologyQAPoint:password>1111</OntologyQAPoint:password>
     <OntologyQAPoint:userName>tugce</OntologyQAPoint:userName>
     <OntologyQAPoint:answered rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326552565685"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1326828173126">
     <OntologyQAPoint:isAskedBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde"/>
-    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:TagsOfQuestion>
-    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
     <OntologyQAPoint:LatitudeOfQuestion>41.077023</OntologyQAPoint:LatitudeOfQuestion>
     <OntologyQAPoint:Text>Do you know any restaurant that I can eat Italian food</OntologyQAPoint:Text>
+    <OntologyQAPoint:TagsOfQuestion>http://dbpedia.org/resource/Italian;;http://dbpedia.org/class/yago/ItalianPeople;;http://dbpedia.org/class/yago/Ping-PongVirus;;http://dbpedia.org/class/yago/ItalianLanguAge;;</OntologyQAPoint:TagsOfQuestion>
+    <OntologyQAPoint:LongitudeOfQuestion>29.02605</OntologyQAPoint:LongitudeOfQuestion>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#LongitudeOfQuestion">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#LatitudeOfQuestion">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer1326318956163">
     <OntologyQAPoint:isAnsweredBy rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#gozde"/>
     <OntologyQAPoint:isAnswerOf rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Question1325967801182"/>
     <OntologyQAPoint:AnswerText>At Fontana di Trevi</OntologyQAPoint:AnswerText>
     <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2011/11/OntologyQAPoint.owl#Answer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </rdf:Description>
 </rdf:RDF>
