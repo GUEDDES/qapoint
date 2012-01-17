@@ -630,6 +630,47 @@ public class dataAccess {
 			  }
 			return interestsOfUser;
 		}
+		
+		//sing-in
+		public void addUser(String userName,String password){
+			this.addUserIndividual(userName,password, UserClass);
+			writeToOwl();
+		}
+
+		
+		private void addUserIndividual(String newIndivName,String newIndivPassword,String className) {
+			String newIndivPath = baseUri + "#"+ newIndivName;
+			ExtendedIterator iterator = currentModel.listClasses();
+			Resource res = null;
+			for (; iterator.hasNext();) {
+				res = (Resource) iterator.next();
+				if(res.getLocalName().equals(className))
+					break;
+			}
+		    Individual newIndiv = currentModel.createIndividual(newIndivPath, res);
+		    this.addProperty("password", newIndivPassword, newIndivName);
+		    writeToOwl();
+		}
+
+		//sign-up
+		public boolean logIn(String userName,String password){
+			String pathToUserClass = baseUri + "#" +  UserClass;
+			Resource resUser = currentModel.getResource(pathToUserClass);
+			ExtendedIterator iterator = currentModel.listIndividuals(resUser);
+				
+			Individual indivQuestion = null;
+			String pathToProp = baseUri + "#" + "password";
+			DatatypeProperty p = currentModel.getDatatypeProperty(pathToProp);
+			String pVal="";
+				
+			 for(; iterator.hasNext();) {
+					indivQuestion =  (Individual) iterator.next();
+					pVal = indivQuestion.getPropertyValue(p).toString();
+					if(pVal.equals(password) && indivQuestion.getLocalName().equals(userName))
+						return true;
+			  }
+	        return false;
+		}
 }
 	
 	
