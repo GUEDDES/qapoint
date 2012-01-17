@@ -51,8 +51,9 @@ public class UserProfileActivityListener implements OnClickListener {
 
 					try{
 						final String text = questionText.replaceAll(" ", "%20");
-						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
-	
+//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/askquestion/" + text + "/" + username + "/" + "41.077022:29.026051");
+						
 						Gson gson = new GsonBuilder().create();
 						ColdAnswerList coldAnswerList = gson.fromJson(result, ColdAnswerList.class);
 	//					Log.i("QAPoint", coldAnswer.getUsername() + " - " + coldAnswer.getAnswer());
@@ -85,7 +86,8 @@ public class UserProfileActivityListener implements OnClickListener {
 				@Override
 				public void run() {
 					try{
-						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getrecommendedquestions/" + username);
+//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getrecommendedquestions/" + username);
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getrecommendedquestions/" + username);
 						Gson gson = new GsonBuilder().create();
 						QuestionList recommendedQuestionList = gson.fromJson(result, QuestionList.class);
 						
@@ -127,7 +129,8 @@ public class UserProfileActivityListener implements OnClickListener {
 				public void run() {
 					
 					try{
-						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getquestions/" + username);
+//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getquestions/" + username);
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getquestions/" + username);
 						Gson gson = new GsonBuilder().create();
 						QuestionList personalQuestionList = gson.fromJson(result, QuestionList.class);
 						
@@ -170,7 +173,8 @@ public class UserProfileActivityListener implements OnClickListener {
 				public void run() {
 					
 					try{
-						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getsimilarusers/" + username);
+//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/getsimilarusers/" + username);
+						String result = RestClient.connect("http://10.0.2.2:8080/rest/qapoint/getsimilarusers/" + username);
 						Gson gson = new GsonBuilder().create();
 						UserList similarProfilesList = gson.fromJson(result, UserList.class);
 						
