@@ -37,8 +37,8 @@ public class SignupActivityListener implements OnClickListener {
 				public void run() {
 					
 					try{
-//						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/signupuser/" + username + "/" + password);
-						RestClient.connect("http://10.0.2.2:8080/rest/qapoint/signupuser/" + username + "/" + password);
+						String result = RestClient.connect("http://174.143.253.161:8080/rest/qapoint/signupuser/" + username + "/" + password);
+//						RestClient.connect("http://10.0.2.2:8080/rest/qapoint/signupuser/" + username + "/" + password);
 						Intent loginActivityIntent = new Intent(window.getContext(),LoginActivity.class);
 						window.getContext().startActivity(loginActivityIntent);
 					} catch (Exception e){
