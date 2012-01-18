@@ -28,7 +28,8 @@ import edu.boun.ssw.client.WarmAnswer;
 
 public class dataAccess {
 
-	public static final String QA_POINT_OWL_LOC = "D:\\dev\\workspaces_helios\\android\\qapoint-server-all\\src\\ontos\\OntologyQAPoint.owl";
+	public static final String QA_POINT_OWL_LOC = "/home/yavuz/OntologyQAPoint.owl";
+//	public static final String QA_POINT_OWL_LOC = "D:\\dev\\workspaces_helios\\android\\qapoint-server-all\\src\\ontos\\OntologyQAPoint.owl";
 	//classes
     public String QuestionClass = "Question";
     String AnswerClass = "Answer";
